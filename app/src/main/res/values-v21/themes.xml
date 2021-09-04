@@ -33,7 +33,7 @@
 
     </style>
 
-    <style name="Theme.FirstKotlinProject" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.FirstKotlinProject21" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
 <!--        <item name="android:windowContentOverlay">@null</item>-->
 <!--        <item name="android:windowFullscreen">true</item>-->
