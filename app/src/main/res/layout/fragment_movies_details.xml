@@ -170,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="95dp"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/roboto_black"
                 android:lineSpacingExtra="4sp"
                 android:text="@string/_125_reviews"
                 android:textColor="#6D6D80"
