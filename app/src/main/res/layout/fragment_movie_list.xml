@@ -202,7 +202,6 @@
             android:layout_width="33dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/radius"
             app:srcCompat="@drawable/ic_baseline_my_location_24" />
 
         <TextView

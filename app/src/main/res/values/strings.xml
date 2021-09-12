@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FirstKotlinProject</string>
     <string name="next_activity">Next activity</string>
     <string name="back">Back</string>
     <string name="avengers">Avengers:</string>
     <string name="end_game">End Game</string>
-    <string name="_13">13+</string>
     <string name="tag">Action, Adventure, Fantasy</string>
     <string name="_125_reviews">125 Reviews</string>
     <string name="storyline">Storyline</string>
