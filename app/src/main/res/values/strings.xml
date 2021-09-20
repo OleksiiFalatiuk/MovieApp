@@ -7,6 +7,9 @@
     <string name="end_game">End Game</string>
     <string name="tag">Action, Adventure, Fantasy</string>
     <string name="_125_reviews">125 Reviews</string>
+    <string name="_38_reviews">38 Reviews</string>
+    <string name="_98_reviews">98 Reviews</string>
+    <string name="_74_reviews">74 Reviews</string>
     <string name="storyline">Storyline</string>
     <string name="story">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.</string>
     <string name="cast">Cast</string>
@@ -20,6 +23,16 @@
     <string name="movie_list">Movie list</string>
     <string name="_13">13+</string>
     <string name="avengers_end_game">Avengers: End Game</string>
+    <string name="ww_1984">Wonder Woman 1984</string>
+    <string name="black_widow">Black Widow</string>
+    <string name="tenet">Tenet</string>
     <string name="_137_min">137 min</string>
+    <string name="_120_min">120 min</string>
+    <string name="_102_min">102 min</string>
+    <string name="_97_min">97 min</string>
+    <string name="_16">16+</string>
+    <string name="action_sci_fi_thriller">Action, Sci-Fi, Thriller</string>
+    <string name="action_adventure_fantasy">Action, Adventure, Fantasy</string>
+    <string name="action_adventure_sci_fi">Action, Adventure, Sci-Fi</string>
 
 </resources>
