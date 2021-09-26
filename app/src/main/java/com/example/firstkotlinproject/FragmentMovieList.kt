@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.RecyclerView
+import com.example.firstkotlinproject.adapters.MovieListAdapter
+import com.example.firstkotlinproject.domain.MovieData
 
 
 class FragmentMovieList : Fragment() {
 
+    private var recycler: RecyclerView? = null
     private var someFragmentClickListener: SomeFragmentClickListener? = null
+
 
 
     override fun onCreateView(
@@ -30,6 +35,23 @@ class FragmentMovieList : Fragment() {
 
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recycler =  view.findViewById(R.id.rvActors)
+        recycler?.adapter = MovieListAdapter()
+    }
+
+    override fun onStart() {
+        updateData()
+        super.onStart()
+    }
+
+    private fun updateData() {
+        (recycler?.adapter as? MovieListAdapter)?.apply {
+            bindActors(MovieData().getMovie())
+        }
+    }
+
 
     override fun onDetach() {
         super.onDetach()
