@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".FragmentMoviesDetails">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageDetail"
+            android:layout_width="405dp"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/mask"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/orig" />
+
+
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="42dp"
+            android:layout_height="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="32dp"
+            android:elevation="4dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                app:srcCompat="@drawable/ic_path" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="0.5dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/back"
+                android:textColor="@color/colorOfText"
+                android:textSize="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/name"
+            android:layout_width="343dp"
+            android:layout_height="112dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="198dp"
+            android:layout_marginRight="16dp"
+            android:elevation="4dp">
+
+
+            <TextView
+                android:id="@+id/detailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView4"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_vertical"
+                android:text="Avengers \nEnd Game"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/yearsDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/_13"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tagline"
+            android:layout_width="343dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="314dp">
+
+            <TextView
+                android:id="@+id/tag"
+                android:layout_width="343dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/tag"
+                android:textColor="@color/pink" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/reviews"
+            android:layout_width="179dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="338dp"
+            >
+
+            <ImageView
+                android:id="@+id/detailStar1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                app:srcCompat="@drawable/ic_baseline_star_rate_24" />
+
+            <ImageView
+                android:id="@+id/detailStar2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="18dp"
+                app:srcCompat="@drawable/ic_baseline_star_rate_24" />
+
+            <ImageView
+                android:id="@+id/detailStar3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="36dp"
+                app:srcCompat="@drawable/ic_baseline_star_rate_24" />
+
+            <ImageView
+                android:id="@+id/detailStar4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="54dp"
+                app:srcCompat="@drawable/ic_baseline_star_rate_24" />
+
+            <ImageView
+                android:id="@+id/detailStar5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="72dp"
+                app:srcCompat="@drawable/ic_star_grey" />
+
+            <TextView
+                android:id="@+id/detailReviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="95dp"
+                android:fontFamily="@font/roboto_black"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/_125_reviews"
+                android:textColor="#6D6D80"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/storyline"
+            android:layout_width="343dp"
+            android:layout_height="143dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="382dp"
+            >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="343dp"
+                android:layout_height="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/storyline"
+                android:textAppearance="@style/name123" />
+
+            <TextView
+                android:id="@+id/detailStory"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="-17dp"
+                android:alpha="0.75"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/story"
+                android:textAppearance="@style/after_the_d" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/cast"
+            android:layout_width="344dp"
+            android:layout_height="149dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="550dp"
+            >
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="243dp"
+                android:layout_height="24dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/cast"
+                android:textAppearance="@style/heading"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/ivDetail1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="27dp"
+                app:srcCompat="@drawable/daun" />
+
+            <ImageView
+                android:id="@+id/ivDetail2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="27dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                app:srcCompat="@drawable/evans" />
+
+            <ImageView
+                android:id="@+id/ivDetail4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="184dp"
+                android:layout_marginLeft="184dp"
+                android:layout_marginTop="27dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                app:srcCompat="@drawable/thor" />
+
+            <ImageView
+                android:id="@+id/ivDetail3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="96dp"
+                android:layout_marginLeft="96dp"
+                android:layout_marginTop="27dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                app:srcCompat="@drawable/ruffalo" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="80sp"
+                android:layout_height="32sp"
+                android:layout_below="@+id/ivDetail1"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/robert_downey_jr"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="80sp"
+                android:layout_height="32sp"
+                android:layout_below="@+id/ivDetail2"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/chris_evans"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="80sp"
+                android:layout_height="32sp"
+                android:layout_below="@+id/ivDetail3"
+                android:layout_marginStart="96dp"
+                android:layout_marginLeft="96dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/mark_ruffalo"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="80sp"
+                android:layout_height="32sp"
+                android:layout_below="@+id/ivDetail4"
+                android:layout_marginStart="184dp"
+                android:layout_marginLeft="184dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/ivDetail1"
+                android:layout_toRightOf="@+id/ivDetail1"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/chris_hemsworth"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
