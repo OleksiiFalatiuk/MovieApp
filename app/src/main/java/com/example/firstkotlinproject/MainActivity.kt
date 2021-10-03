@@ -12,7 +12,7 @@ import android.widget.TextView
 import com.example.firstkotlinproject.adapters.MovieListAdapter
 
 
-class MainActivity : AppCompatActivity(), MovieListAdapter.ItemClickListener {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,12 +25,8 @@ class MainActivity : AppCompatActivity(), MovieListAdapter.ItemClickListener {
 
     }
 
-    override fun onItemClick() {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flMain, FragmentMoviesDetails(),null)
-            addToBackStack(null)
-                .commit()
-        }
+
+
 
 //    override fun changeFragment() {
 //        supportFragmentManager.beginTransaction().apply {
@@ -40,4 +36,3 @@ class MainActivity : AppCompatActivity(), MovieListAdapter.ItemClickListener {
 //        }
 //    }
     }
-}

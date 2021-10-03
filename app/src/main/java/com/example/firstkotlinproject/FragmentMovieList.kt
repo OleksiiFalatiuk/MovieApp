@@ -2,6 +2,7 @@ package com.example.firstkotlinproject
 
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,8 @@ import com.example.firstkotlinproject.adapters.MovieListAdapter
 import com.example.firstkotlinproject.domain.MovieData
 
 
-class FragmentMovieList : Fragment() {
-
+class FragmentMovieList : Fragment(), MovieListAdapter.ItemClickListener {
     private var recycler: RecyclerView? = null
-//    private var someFragmentClickListener: SomeFragmentClickListener? = null
 
 
 
@@ -27,18 +26,14 @@ class FragmentMovieList : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
 
-//        view?.findViewById<FrameLayout>(R.id.movie)?.apply {
-//            setOnClickListener{
-//                someFragmentClickListener?.changeFragment()
-//            }
-//        }
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler =  view.findViewById(R.id.rvActors)
+        recycler = view.findViewById(R.id.rvActors)
         recycler?.adapter = MovieListAdapter()
+        (recycler?.adapter as? MovieListAdapter)?.itemclick = this
+
     }
 
     override fun onStart() {
@@ -52,21 +47,14 @@ class FragmentMovieList : Fragment() {
         }
     }
 
-
-//    override fun onDetach() {
-//        super.onDetach()
-//        someFragmentClickListener = null
-//    }
-//
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is SomeFragmentClickListener)
-//            someFragmentClickListener = context
-//    }
+    override fun onItemClick() {
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
+            replace(R.id.flMain, FragmentMoviesDetails(), null)
+            addToBackStack(null)
+                .commit()
+        }
 
 
-//    interface SomeFragmentClickListener{
-//        fun changeFragment()
-//    }
 
+    }
 }

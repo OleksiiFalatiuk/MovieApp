@@ -1,14 +1,11 @@
 package com.example.firstkotlinproject.adapters
 
-import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.data.Movie
@@ -16,7 +13,7 @@ import com.example.firstkotlinproject.data.Movie
 class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     private var list = listOf<Movie>()
-    private var itemclick: ItemClickListener? = null
+    public var itemclick: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie,parent,false))
