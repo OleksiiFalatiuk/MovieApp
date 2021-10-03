@@ -15,7 +15,8 @@ import com.example.firstkotlinproject.data.Movie
 
 class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
-      private var list = listOf<Movie>()
+    private var list = listOf<Movie>()
+    private var itemclick: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie,parent,false))
@@ -36,6 +37,9 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
             holder.review?.text = movie.reviews
             holder.name?.text = movie.name
             holder.time?.text = movie.time
+            holder.avatar?.apply { setOnClickListener{
+                itemclick?.onItemClick()
+            } }
         }
     }
 
@@ -43,6 +47,8 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
         list = newMovie
         notifyDataSetChanged()
     }
+
+
 
     override fun getItemCount(): Int = list.size
 
@@ -59,6 +65,11 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
         val review: TextView? = itemView.findViewById(R.id.tvReviews)
         val name: TextView? = itemView.findViewById(R.id.tvName)
         val time: TextView? = itemView.findViewById(R.id.tvTime)
+        val rvActor: RecyclerView? = itemView.findViewById(R.id.rvActors)
 
+    }
+
+    interface ItemClickListener{
+        fun onItemClick()
     }
 }

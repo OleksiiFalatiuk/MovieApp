@@ -9,7 +9,7 @@
 
 
     <FrameLayout
-        android:id="@+id/movie"
+        android:id="@+id/movie123"
         android:layout_width="170dp"
         android:layout_height="296dp"
         android:layout_marginLeft="12dp"

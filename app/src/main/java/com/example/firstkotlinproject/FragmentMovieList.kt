@@ -16,7 +16,7 @@ import com.example.firstkotlinproject.domain.MovieData
 class FragmentMovieList : Fragment() {
 
     private var recycler: RecyclerView? = null
-    private var someFragmentClickListener: SomeFragmentClickListener? = null
+//    private var someFragmentClickListener: SomeFragmentClickListener? = null
 
 
 
@@ -27,11 +27,11 @@ class FragmentMovieList : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
 
-        view?.findViewById<FrameLayout>(R.id.movie)?.apply {
-            setOnClickListener{
-                someFragmentClickListener?.changeFragment()
-            }
-        }
+//        view?.findViewById<FrameLayout>(R.id.movie)?.apply {
+//            setOnClickListener{
+//                someFragmentClickListener?.changeFragment()
+//            }
+//        }
 
         return view
     }
@@ -53,20 +53,20 @@ class FragmentMovieList : Fragment() {
     }
 
 
-    override fun onDetach() {
-        super.onDetach()
-        someFragmentClickListener = null
-    }
+//    override fun onDetach() {
+//        super.onDetach()
+//        someFragmentClickListener = null
+//    }
+//
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        if (context is SomeFragmentClickListener)
+//            someFragmentClickListener = context
+//    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is SomeFragmentClickListener)
-            someFragmentClickListener = context
-    }
 
-
-    interface SomeFragmentClickListener{
-        fun changeFragment()
-    }
+//    interface SomeFragmentClickListener{
+//        fun changeFragment()
+//    }
 
 }

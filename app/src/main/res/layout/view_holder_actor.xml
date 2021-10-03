@@ -272,7 +272,7 @@
                 app:srcCompat="@drawable/ruffalo" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvDetail1"
                 android:layout_width="80sp"
                 android:layout_height="32sp"
                 android:layout_below="@+id/ivDetail1"
@@ -284,7 +284,7 @@
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/tvDetail2"
                 android:layout_width="80sp"
                 android:layout_height="32sp"
                 android:layout_below="@+id/ivDetail2"
@@ -299,7 +299,7 @@
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvDetail3"
                 android:layout_width="80sp"
                 android:layout_height="32sp"
                 android:layout_below="@+id/ivDetail3"
@@ -314,7 +314,7 @@
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/tvDetail4"
                 android:layout_width="80sp"
                 android:layout_height="32sp"
                 android:layout_below="@+id/ivDetail4"

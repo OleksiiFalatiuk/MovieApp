@@ -9,26 +9,35 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
+import com.example.firstkotlinproject.adapters.MovieListAdapter
 
 
-class MainActivity : AppCompatActivity(), FragmentMovieList.SomeFragmentClickListener {
+class MainActivity : AppCompatActivity(), MovieListAdapter.ItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-     supportFragmentManager.beginTransaction().apply {
-         add(R.id.flMain,FragmentMovieList())
-         commit()
-     }
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.flMain, FragmentMovieList())
+            commit()
+        }
 
     }
 
-    override fun changeFragment() {
+    override fun onItemClick() {
         supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flMain, FragmentMoviesDetails(),null)
             addToBackStack(null)
-            add(R.id.flMain,FragmentMoviesDetails())
                 .commit()
         }
+
+//    override fun changeFragment() {
+//        supportFragmentManager.beginTransaction().apply {
+//            addToBackStack(null)
+//            add(R.id.flMain,FragmentMoviesDetails())
+//                .commit()
+//        }
+//    }
     }
 }
