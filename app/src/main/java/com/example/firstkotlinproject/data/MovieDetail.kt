@@ -11,7 +11,7 @@ data class MovieDetail(
     val detailStar4: Int,
     val detailStar5: Int,
     val detailReviews: String,
-    val story: Int,
+    val story: String,
     val actor1: Int,
     val actor2: Int,
     val actor3: Int,

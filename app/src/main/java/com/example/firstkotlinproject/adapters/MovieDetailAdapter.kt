@@ -34,7 +34,7 @@ class MovieDetailAdapter: RecyclerView.Adapter<MovieDetailAdapter.ViewHolder>() 
             holder.detailStar4?.setImageDrawable(holder.itemView.context.getDrawable(detail.detailStar4))
             holder.detailStar5?.setImageDrawable(holder.itemView.context.getDrawable(detail.detailStar5))
             holder.detailReviews?.text = detail.detailReviews
-            holder.detailStory?.text = detail.story.toString()
+            holder.detailStory?.text = detail.story
             holder.actor1?.setImageDrawable(holder.itemView.context.getDrawable(detail.actor1))
             holder.actor2?.setImageDrawable(holder.itemView.context.getDrawable(detail.actor2))
             holder.actor3?.setImageDrawable(holder.itemView.context.getDrawable(detail.actor3))
