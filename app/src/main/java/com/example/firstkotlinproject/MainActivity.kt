@@ -25,14 +25,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-//    override fun changeFragment() {
-//        supportFragmentManager.beginTransaction().apply {
-//            addToBackStack(null)
-//            add(R.id.flMain,FragmentMoviesDetails())
-//                .commit()
-//        }
-//    }
     }
