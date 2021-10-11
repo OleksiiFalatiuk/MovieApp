@@ -8,12 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.R
-import com.example.firstkotlinproject.data.Movie
-import com.example.firstkotlinproject.data.MovieDetail
+import com.example.firstkotlinproject.data.ActorData
 
 class MovieDetailAdapter: RecyclerView.Adapter<MovieDetailAdapter.ViewHolder>() {
 
-    private var listDetail = listOf<MovieDetail>()
+    private var listDetail = listOf<ActorData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -46,7 +45,7 @@ class MovieDetailAdapter: RecyclerView.Adapter<MovieDetailAdapter.ViewHolder>() 
         }
     }
 
-    fun bindActorsDetail(newDetail: List<MovieDetail>) {
+    fun bindActorsDetail(newDetail: List<ActorData>) {
         listDetail = newDetail
         notifyDataSetChanged()
     }

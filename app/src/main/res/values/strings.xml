@@ -6,7 +6,7 @@
     <string name="avengers">Avengers:</string>
     <string name="end_game">End Game</string>
     <string name="tag">Action, Adventure, Fantasy</string>
-    <string name="_125_reviews">125 Reviews</string>
+    <string name="_125_reviews">%d Reviews</string>
     <string name="_38_reviews">38 Reviews</string>
     <string name="_98_reviews">98 Reviews</string>
     <string name="_74_reviews">74 Reviews</string>
@@ -21,7 +21,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie_list">Movie list</string>
-    <string name="_13">13+</string>
+    <string name="_13">%d+</string>
     <string name="avengers_end_game">Avengers: End Game</string>
     <string name="ww_1984">Wonder Woman 1984</string>
     <string name="black_widow">Black Widow</string>

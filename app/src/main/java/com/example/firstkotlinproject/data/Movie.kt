@@ -1,16 +1,22 @@
 package com.example.firstkotlinproject.data
 
-data class Movie(val avatar: Int,
-                 val years: String,
-                 val heart_avatar: Int,
-                 val genre: String,
-                 val star1: Int,
-                 val star2: Int,
-                 val star3: Int,
-                 val star4: Int,
-                 val star5: Int,
-                 val reviews: String,
-                 val name: String,
-                 val time: String
+import androidx.annotation.DrawableRes
+
+data class Movie(
+    val id: Int,
+    val years: Int,
+    val name: String,
+    val genre: String,
+    val time: String,
+    val review: Int,
+    @DrawableRes val star1: Int,
+    @DrawableRes val star2: Int,
+    @DrawableRes val star3: Int,
+    @DrawableRes val star4: Int,
+    @DrawableRes val star5: Int,
+    @DrawableRes val avatar: Int,
+    @DrawableRes val detailImageRes: Int,
+    val storyLine: String,
+    val actors: List<ActorData>
 )
 

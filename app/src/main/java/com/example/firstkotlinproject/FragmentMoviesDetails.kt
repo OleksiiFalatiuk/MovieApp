@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.adapters.MovieDetailAdapter
-import com.example.firstkotlinproject.adapters.MovieListAdapter
-import com.example.firstkotlinproject.domain.DetailData
-import com.example.firstkotlinproject.domain.MovieData
 
 
 class FragmentMoviesDetails : Fragment() {
