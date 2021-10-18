@@ -178,7 +178,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/root_right_guideline"
-            app:layout_constraintStart_toEndOf="@+id/detailStar4"
+            app:layout_constraintStart_toEndOf="@+id/detailStar5"
             app:layout_constraintTop_toBottomOf="@+id/tag"
             android:layout_marginLeft="8dp" />
 
