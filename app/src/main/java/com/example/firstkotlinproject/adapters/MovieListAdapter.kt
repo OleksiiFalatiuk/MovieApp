@@ -14,10 +14,11 @@ import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.data.Movie
 import com.example.firstkotlinproject.domain.MovieData
 
-class MovieListAdapter: ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallback()) {
+class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
+    ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallback()) {
 
     private var list = listOf<Movie>()
-    var itemclick: ItemClickListener? = null
+//    var itemclick: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,20 +27,20 @@ class MovieListAdapter: ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallb
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = list[position]
-        holder.bind(movie)
-        holder.itemView.apply {
-            setOnClickListener {
-                itemclick?.onItemClick()
-            }
-        }
+        val movie = getItem(position)
+        holder.bind(movie,onClickCard)
+//        holder.itemView.apply {
+//            setOnClickListener {
+//                itemclick?.onItemClick(movie)
+//            }
+//        }
     }
 
 
-    fun bindActors(newMovie: List<Movie>) {
-        list = newMovie
-        notifyDataSetChanged()
-    }
+//    fun bindActors(newMovie: List<Movie>) {
+//        list = newMovie
+//        notifyDataSetChanged()
+//    }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -55,7 +56,7 @@ class MovieListAdapter: ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallb
         private val name: TextView? = itemView.findViewById(R.id.tvName)
         private val time: TextView? = itemView.findViewById(R.id.tvTime)
 
-        fun bind(item: Movie) {
+        fun bind(item: Movie,onClickCard: (item: Movie) -> Unit) {
             avatar?.setImageResource(item.avatar)
             years?.text =
                 itemView.context.getString(R.string._13, item.years)
@@ -69,13 +70,17 @@ class MovieListAdapter: ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallb
                 itemView.context.getString(R.string._125_reviews, item.review)
             name?.text = item.name
             time?.text = item.time
+
+            itemView.setOnClickListener {
+                onClickCard(item)
+            }
         }
 
     }
 
-    interface ItemClickListener {
-        fun onItemClick()
-    }
+//    interface ItemClickListener {
+//        fun onItemClick(movieData: Movie)
+//    }
 
     class DiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {

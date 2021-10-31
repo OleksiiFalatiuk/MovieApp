@@ -16,7 +16,7 @@ import com.example.firstkotlinproject.data.Movie
 
 class FragmentMoviesDetails : Fragment() {
 
-    private var recyclerDetail: RecyclerView? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,7 @@ class FragmentMoviesDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val movieData = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Movie ?: return
 
-//        updateMovieDetailsInfo(movieData)
+        updateMovieDetailsInfo(movieData)
 
         view.findViewById<RecyclerView>(R.id.recycler_movies).apply {
 
@@ -50,21 +50,26 @@ class FragmentMoviesDetails : Fragment() {
             ?.setImageResource(movie.detailImageRes)
 
         view?.findViewById<TextView>(R.id.yearsDetail)?.text =
-            context?.getString(R.string.movies_list_allowed_age_template, movie.pgAge)
+            context?.getString(R.string._13, movie.years)
 
-        view?.findViewById<TextView>(R.id.movie_name_text)?.text = movie.title
-        view?.findViewById<TextView>(R.id.movie_tags_text)?.text = movie.genre
-        view?.findViewById<TextView>(R.id.movie_reviews_count_text)?.text =
-            context?.getString(R.string.movies_list_reviews_template, movie.reviewCount)
-        view?.findViewById<TextView>(R.id.movie_storyline_text)?.text = movie.storyLine
+        view?.findViewById<TextView>(R.id.movie_name_text)?.text = movie.name
+        view?.findViewById<TextView>(R.id.tag)?.text = movie.genre
+        view?.findViewById<TextView>(R.id.detailReviews)?.text =
+            context?.getString(R.string._125_reviews, movie.review)
+        view?.findViewById<TextView>(R.id.detailStory)?.text = movie.storyLine
 
-        val starsImages = listOf<ImageView?>(
-            view?.findViewById(R.id.star1_image),
-            view?.findViewById(R.id.star2_image),
-            view?.findViewById(R.id.star3_image),
-            view?.findViewById(R.id.star4_image),
-            view?.findViewById(R.id.star5_image)
-        )
+        view?.findViewById<ImageView>(R.id.detailStar1)
+            ?.setImageResource(movie.star1)
+        view?.findViewById<ImageView>(R.id.detailStar2)
+            ?.setImageResource(movie.star2)
+        view?.findViewById<ImageView>(R.id.detailStar3)
+            ?.setImageResource(movie.star3)
+        view?.findViewById<ImageView>(R.id.detailStar4)
+            ?.setImageResource(movie.star4)
+        view?.findViewById<ImageView>(R.id.detailStar5)
+            ?.setImageResource(movie.star5)
+
+
     }
 
 //    override fun onStart() {

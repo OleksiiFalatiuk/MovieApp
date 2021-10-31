@@ -17,12 +17,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.flMain, FragmentMovieList())
-            commit()
+        if (savedInstanceState == null) {
+            routeToMoviesList()
         }
 
+//        supportFragmentManager.beginTransaction().apply {
+//            add(R.id.flMain, FragmentMovieList())
+//            commit()
+//        }
+
+    }
+
+    private fun routeToMoviesList() {
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.flMain,
+                FragmentMovieList.create(),
+                FragmentMovieList::class.java.simpleName
+            )
+            .addToBackStack("trans:${FragmentMovieList::class.java.simpleName}")
+            .commit()
     }
 
     }

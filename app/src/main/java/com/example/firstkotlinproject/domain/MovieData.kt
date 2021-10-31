@@ -4,7 +4,7 @@ import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.data.ActorData
 import com.example.firstkotlinproject.data.Movie
 
-class MovieData {
+object MovieData {
     fun getMovie() = arrayListOf(
         Movie(
             1,
@@ -39,7 +39,7 @@ class MovieData {
             R.drawable.ic_baseline_star_rate_24,
             R.drawable.ic_baseline_star_rate_24,
             R.drawable.ic_baseline_star_rate_24,
-            R.drawable.ic_baseline_star_rate_24,
+            R.drawable.ic_star_grey,
             R.drawable.tenet,
             R.drawable.orig,
             "A secret agent embarks on a dangerous, time-bending mission to prevent the start of World War III.",
@@ -83,7 +83,7 @@ class MovieData {
             R.drawable.ic_baseline_star_rate_24,
             R.drawable.ic_baseline_star_rate_24,
             R.drawable.ic_baseline_star_rate_24,
-            R.drawable.ic_baseline_star_rate_24,
+            R.drawable.ic_star_grey,
             R.drawable.ww84,
             R.drawable.orig,
             "Wonder Woman squares off against Maxwell Lord and the Cheetah, a villainess who possesses superhuman strength and agility.",
