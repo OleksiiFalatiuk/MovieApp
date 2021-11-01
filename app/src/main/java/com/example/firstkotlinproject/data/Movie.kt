@@ -1,6 +1,7 @@
 package com.example.firstkotlinproject.data
 
 import androidx.annotation.DrawableRes
+import java.io.Serializable
 
 data class Movie(
     val id: Int,
@@ -18,5 +19,5 @@ data class Movie(
     @DrawableRes val detailImageRes: Int,
     val storyLine: String,
     val actors: List<ActorData>
-)
+) : Serializable
 

@@ -10,15 +10,18 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.example.firstkotlinproject.adapters.MovieListAdapter
+import com.example.firstkotlinproject.data.Movie
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    FragmentMovieList.MoviesListItemClickListener,
+    FragmentMoviesDetails.MovieDetailsBackClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            routeToMoviesList()
+            toMoviesList()
         }
 
 //        supportFragmentManager.beginTransaction().apply {
@@ -28,7 +31,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun routeToMoviesList() {
+    override fun onMovieSelected(movieData: Movie) {
+        toMovieDetails(movieData)
+    }
+
+    override fun onMovieDeselected() {
+        backStack()
+    }
+
+    private fun toMoviesList() {
         supportFragmentManager.beginTransaction()
             .add(
                 R.id.flMain,
@@ -39,4 +50,19 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    private fun toMovieDetails(movieData: Movie) {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.flMain,
+                FragmentMoviesDetails.create(movieData),
+                FragmentMoviesDetails::class.java.simpleName
+            )
+            .addToBackStack("trans:${FragmentMoviesDetails::class.java.simpleName}")
+            .commit()
     }
+
+    private fun backStack() {
+        supportFragmentManager.popBackStack()
+    }
+
+}

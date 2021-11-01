@@ -1,5 +1,6 @@
 package com.example.firstkotlinproject
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +17,15 @@ import com.example.firstkotlinproject.data.Movie
 
 class FragmentMoviesDetails : Fragment() {
 
+    var listener: MovieDetailsBackClickListener? = null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is MovieDetailsBackClickListener) {
+            listener = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +52,12 @@ class FragmentMoviesDetails : Fragment() {
             adapter.submitList(movieData.actors)
         }
 
+    }
+
+    override fun onDetach() {
+        listener = null
+
+        super.onDetach()
     }
 
     private fun updateMovieDetailsInfo(movie : Movie) {
@@ -83,16 +98,18 @@ class FragmentMoviesDetails : Fragment() {
 //        }
 //    }
 
+    interface MovieDetailsBackClickListener {
+        fun onMovieDeselected()
+    }
+
     companion object {
         private const val PARAM_MOVIE_DATA = "movie_data"
 
-        fun create(movie : Movie) = FragmentMoviesDetails().also {
+        fun create(movieData : Movie) = FragmentMoviesDetails().also {
             val args = bundleOf(
-                PARAM_MOVIE_DATA to movie
+                PARAM_MOVIE_DATA to movieData
             )
             it.arguments = args
         }
     }
-
-
 }
