@@ -1,6 +1,5 @@
 package com.example.firstkotlinproject.adapters
 
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.R
-import com.example.firstkotlinproject.data.ActorData
+import com.example.firstkotlinproject.model.Actor
 
-class MovieDetailAdapter: ListAdapter<ActorData, MovieDetailAdapter.ViewHolder>(DiffCallback()) {
+class MovieDetailAdapter: ListAdapter<Actor, MovieDetailAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -32,18 +31,18 @@ class MovieDetailAdapter: ListAdapter<ActorData, MovieDetailAdapter.ViewHolder>(
         private val actorImage: ImageView = itemView.findViewById(R.id.actor_image)
         private val actorName: TextView = itemView.findViewById(R.id.actor_name)
 
-        fun bind(item: ActorData) {
+        fun bind(item: Actor) {
             actorImage.setImageResource(item.imageRes)
             actorName.text = item.name
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ActorData>() {
-        override fun areItemsTheSame(oldItem: ActorData, newItem: ActorData): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Actor>() {
+        override fun areItemsTheSame(oldItem: Actor, newItem: Actor): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ActorData, newItem: ActorData): Boolean {
+        override fun areContentsTheSame(oldItem: Actor, newItem: Actor): Boolean {
             return oldItem == newItem
         }
     }

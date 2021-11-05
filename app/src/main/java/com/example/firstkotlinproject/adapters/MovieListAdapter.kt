@@ -1,18 +1,19 @@
 package com.example.firstkotlinproject.adapters
 
-import android.content.Context
-import android.os.Build
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.R
-import com.example.firstkotlinproject.data.Movie
-import com.example.firstkotlinproject.domain.MovieData
+import com.example.firstkotlinproject.model.Movie
 
 class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
     ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallback()) {
@@ -47,29 +48,52 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
         private val avatar: ImageView? = itemView.findViewById(R.id.ivMain)
         private val years: TextView? = itemView.findViewById(R.id.tvYears)
         private val genre: TextView? = itemView.findViewById(R.id.tvGenre)
-        private val star1: ImageView? = itemView.findViewById(R.id.ivStar1)
-        private val star2: ImageView? = itemView.findViewById(R.id.ivStar2)
-        private val star3: ImageView? = itemView.findViewById(R.id.ivStar3)
-        private val star4: ImageView? = itemView.findViewById(R.id.ivStar4)
-        private val star5: ImageView? = itemView.findViewById(R.id.ivStar5)
+        private val likeImage: ImageView = itemView.findViewById(R.id.ivHeart)
+        private val starsImages: List<ImageView> = listOf(
+            itemView.findViewById(R.id.ivStar1),
+            itemView.findViewById(R.id.ivStar2),
+            itemView.findViewById(R.id.ivStar3),
+            itemView.findViewById(R.id.ivStar4),
+            itemView.findViewById(R.id.ivStar5)
+        )
         private val review: TextView? = itemView.findViewById(R.id.tvReviews)
         private val name: TextView? = itemView.findViewById(R.id.tvName)
         private val time: TextView? = itemView.findViewById(R.id.tvTime)
 
         fun bind(item: Movie,onClickCard: (item: Movie) -> Unit) {
-            avatar?.setImageResource(item.avatar)
+//            avatar?.setImageResource(item.avatar)
+            if (avatar != null) {
+                Glide.with(itemView).load(item.avatar).into(avatar)
+            }
+            val context = itemView.context
             years?.text =
                 itemView.context.getString(R.string._13, item.years)
-            genre?.text = item.genre
-            star1?.setImageResource(item.star1)
-            star2?.setImageResource(item.star2)
-            star3?.setImageResource(item.star3)
-            star4?.setImageResource(item.star4)
-            star5?.setImageResource(item.star5)
+            genre?.text = item.genre.joinToString { it.name }
             review?.text =
                 itemView.context.getString(R.string._125_reviews, item.review)
             name?.text = item.name
-            time?.text = item.time
+            time?.text = context.getString(R.string.movies_list_film_time, item.time)
+
+            val likeColor = if (item.isLiked) {
+                R.color.pink
+            } else {
+                R.color.white
+            }
+            ImageViewCompat.setImageTintList(
+                likeImage, ColorStateList.valueOf(
+                    ContextCompat.getColor(likeImage.context, likeColor)
+                )
+            )
+
+            //set stars tint
+            starsImages.forEachIndexed { index, imageView ->
+                val colorId = if (item.rating > index) R.color.pink else R.color.gray_dark
+                ImageViewCompat.setImageTintList(
+                    imageView, ColorStateList.valueOf(
+                        ContextCompat.getColor(imageView.context, colorId)
+                    )
+                )
+            }
 
             itemView.setOnClickListener {
                 onClickCard(item)

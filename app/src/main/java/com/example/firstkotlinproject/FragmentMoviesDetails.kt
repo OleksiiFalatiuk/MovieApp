@@ -12,7 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.adapters.MovieDetailAdapter
-import com.example.firstkotlinproject.data.Movie
+import com.example.firstkotlinproject.model.Movie
 
 
 class FragmentMoviesDetails : Fragment() {

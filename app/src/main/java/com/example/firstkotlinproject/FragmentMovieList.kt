@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.adapters.MovieListAdapter
-import com.example.firstkotlinproject.data.Movie
+import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.domain.MovieData
 
 
