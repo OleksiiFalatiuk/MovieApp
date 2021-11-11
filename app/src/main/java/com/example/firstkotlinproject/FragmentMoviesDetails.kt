@@ -1,6 +1,7 @@
 package com.example.firstkotlinproject
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,9 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.adapters.MovieDetailAdapter
 import com.example.firstkotlinproject.model.Movie
 
@@ -61,28 +65,37 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun updateMovieDetailsInfo(movie : Movie) {
-        view?.findViewById<ImageView>(R.id.imageDetail)
-            ?.setImageResource(movie.detailImageRes)
+//        view?.findViewById<ImageView>(R.id.imageDetail)
+//            ?.setImageResource(movie.detailImageRes)
+        Glide.with(this).load(movie.detailImageRes).into(view?.findViewById(R.id.imageDetail))
 
         view?.findViewById<TextView>(R.id.yearsDetail)?.text =
             context?.getString(R.string._13, movie.years)
 
         view?.findViewById<TextView>(R.id.movie_name_text)?.text = movie.name
-        view?.findViewById<TextView>(R.id.tag)?.text = movie.genre
+        view?.findViewById<TextView>(R.id.tag)?.text = movie.genre.joinToString { it.name }
         view?.findViewById<TextView>(R.id.detailReviews)?.text =
             context?.getString(R.string._125_reviews, movie.review)
         view?.findViewById<TextView>(R.id.detailStory)?.text = movie.storyLine
 
-        view?.findViewById<ImageView>(R.id.detailStar1)
-            ?.setImageResource(movie.star1)
-        view?.findViewById<ImageView>(R.id.detailStar2)
-            ?.setImageResource(movie.star2)
-        view?.findViewById<ImageView>(R.id.detailStar3)
-            ?.setImageResource(movie.star3)
-        view?.findViewById<ImageView>(R.id.detailStar4)
-            ?.setImageResource(movie.star4)
-        view?.findViewById<ImageView>(R.id.detailStar5)
-            ?.setImageResource(movie.star5)
+        val starsImages = listOf<ImageView?>(
+            view?.findViewById(R.id.detailStar1),
+            view?.findViewById(R.id.detailStar2),
+            view?.findViewById(R.id.detailStar3),
+            view?.findViewById(R.id.detailStar4),
+            view?.findViewById(R.id.detailStar5)
+        )
+        starsImages.forEachIndexed { index, imageView ->
+            imageView?.let {
+                val colorId =
+                    if (movie.rating > index) R.color.pink else R.color.gray_dark
+                ImageViewCompat.setImageTintList(
+                    imageView, ColorStateList.valueOf(
+                        ContextCompat.getColor(imageView.context, colorId)
+                    )
+                )
+            }
+        }
 
 
     }
