@@ -10,13 +10,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.adapters.MovieListAdapter
 import com.example.firstkotlinproject.model.Movie
-import com.example.firstkotlinproject.domain.MovieData
+import com.example.firstkotlinproject.provider.MovieProvider
+import kotlinx.coroutines.*
+
+//import com.example.firstkotlinproject.domain.MovieData
 
 
 class FragmentMovieList : Fragment() {
+    @DelicateCoroutinesApi
+    private val scopeList = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var recycler: RecyclerView? = null
 
-    var listener: MoviesListItemClickListener? = null
+    private var listener: MoviesListItemClickListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,6 +43,7 @@ class FragmentMovieList : Fragment() {
         return view
     }
 
+    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        recycler = view.findViewById(R.id.rvActors)
 //        recycler?.adapter = MovieListAdapter()
@@ -50,10 +56,19 @@ class FragmentMovieList : Fragment() {
             }
 
             this.adapter = adapter
-
-            adapter.submitList(MovieData.getMovie())
+            loadDataToListAdapter(adapter)
+//            adapter.submitList(MovieData.getMovie())
         }
 
+    }
+
+    @DelicateCoroutinesApi
+    private fun loadDataToListAdapter(adapter: MovieListAdapter){
+        val provider = (requireActivity() as MovieProvider).provideMovie()
+        scopeList.launch {
+            val moviesData = provider.loadMovies()
+            adapter.submitList(moviesData)
+        }
     }
 
 //    override fun onStart() {

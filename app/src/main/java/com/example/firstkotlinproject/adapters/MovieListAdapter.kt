@@ -62,10 +62,10 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
 
         fun bind(item: Movie,onClickCard: (item: Movie) -> Unit) {
 //            avatar?.setImageResource(item.avatar)
-            if (avatar != null) {
-                Glide.with(itemView).load(item.avatar).into(avatar)
-            }
             val context = itemView.context
+            if (avatar != null) {
+                Glide.with(context).load(item.avatar).into(avatar)
+            }
             years?.text =
                 itemView.context.getString(R.string._13, item.years)
             genre?.text = item.genre.joinToString { it.name }
@@ -95,7 +95,7 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
                 )
             }
 
-            itemView.setOnClickListener {
+            avatar?.setOnClickListener {
                 onClickCard(item)
             }
         }

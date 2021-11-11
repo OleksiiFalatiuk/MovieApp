@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.model.Actor
 
@@ -32,7 +33,8 @@ class MovieDetailAdapter: ListAdapter<Actor, MovieDetailAdapter.ViewHolder>(Diff
         private val actorName: TextView = itemView.findViewById(R.id.actor_name)
 
         fun bind(item: Actor) {
-            actorImage.setImageResource(item.imageRes)
+//            actorImage.setImageResource(item.imageRes)
+            Glide.with(itemView).load(item.imageRes).into(actorImage)
             actorName.text = item.name
         }
     }

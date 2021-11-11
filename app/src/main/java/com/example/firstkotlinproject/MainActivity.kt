@@ -2,12 +2,18 @@ package com.example.firstkotlinproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.firstkotlinproject.data.JsonMovieRepository
+import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.model.Movie
+import com.example.firstkotlinproject.provider.MovieProvider
 
 
 class MainActivity : AppCompatActivity(),
     FragmentMovieList.MoviesListItemClickListener,
-    FragmentMoviesDetails.MovieDetailsBackClickListener {
+    FragmentMoviesDetails.MovieDetailsBackClickListener,MovieProvider {
+
+    private val jsonMovieRepository = JsonMovieRepository(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,8 +29,8 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    override fun onMovieSelected(movieData: Movie) {
-        toMovieDetails(movieData)
+    override fun onMovieSelected(movie: Movie) {
+        toMovieDetails(movie)
     }
 
     override fun onMovieDeselected() {
@@ -42,11 +48,11 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    private fun toMovieDetails(movieData: Movie) {
+    private fun toMovieDetails(movie: Movie) {
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.flMain,
-                FragmentMoviesDetails.create(movieData),
+                FragmentMoviesDetails.create(movie.id),
                 FragmentMoviesDetails::class.java.simpleName
             )
             .addToBackStack("trans:${FragmentMoviesDetails::class.java.simpleName}")
@@ -56,5 +62,7 @@ class MainActivity : AppCompatActivity(),
     private fun backStack() {
         supportFragmentManager.popBackStack()
     }
+
+    override fun provideMovie(): MovieRepository = jsonMovieRepository
 
 }

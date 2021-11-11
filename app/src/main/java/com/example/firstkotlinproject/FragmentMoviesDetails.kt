@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.ImageViewCompat
@@ -16,12 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.adapters.MovieDetailAdapter
+import com.example.firstkotlinproject.model.Actor
 import com.example.firstkotlinproject.model.Movie
+import com.example.firstkotlinproject.provider.MovieProvider
+import kotlinx.coroutines.*
 
 
 class FragmentMoviesDetails : Fragment() {
 
     var listener: MovieDetailsBackClickListener? = null
+    @DelicateCoroutinesApi
+    private val scopeDetails = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,10 +46,11 @@ class FragmentMoviesDetails : Fragment() {
         return inflater.inflate(R.layout.fragment_movies_details, container, false)
     }
 
+    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val movieData = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Movie ?: return
+        val movieData = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Int ?: return
 
-        updateMovieDetailsInfo(movieData)
+//        updateMovieDetailsInfo(movieData)
 
         view.findViewById<RecyclerView>(R.id.recycler_movies).apply {
 
@@ -53,9 +60,29 @@ class FragmentMoviesDetails : Fragment() {
 
             this.adapter = adapter
 
-            adapter.submitList(movieData.actors)
+//            adapter.submitList(movieData.actors)
+            scopeDetails.launch {
+                val provider = (requireActivity() as MovieProvider).provideMovie()
+                val detailsData = provider.loadMovie(movieData)
+                if (detailsData != null){
+                    bindUI(view,detailsData)
+                }else{
+                    errorWasFound()
+                }
+            }
         }
 
+    }
+
+    private fun errorWasFound(){
+        Toast.makeText(requireContext(),"Sorry! Something went wrong - we can not find this movie in the system.", Toast.LENGTH_LONG)
+            .show()
+    }
+
+    private fun bindUI(view: View, movie:Movie){
+        updateMovieDetailsInfo(movie)
+        val adapter = view.findViewById<RecyclerView>(R.id.recycler_movies).adapter as MovieDetailAdapter
+        adapter.submitList(movie.actors)
     }
 
     override fun onDetach() {
@@ -67,7 +94,7 @@ class FragmentMoviesDetails : Fragment() {
     private fun updateMovieDetailsInfo(movie : Movie) {
 //        view?.findViewById<ImageView>(R.id.imageDetail)
 //            ?.setImageResource(movie.detailImageRes)
-        Glide.with(this).load(movie.detailImageRes).into(view?.findViewById(R.id.imageDetail))
+        Glide.with(requireContext()).load(movie.detailImageRes).into(view?.findViewById(R.id.imageDetail))
 
         view?.findViewById<TextView>(R.id.yearsDetail)?.text =
             context?.getString(R.string._13, movie.years)
@@ -118,7 +145,7 @@ class FragmentMoviesDetails : Fragment() {
     companion object {
         private const val PARAM_MOVIE_DATA = "movie_data"
 
-        fun create(movieData : Movie) = FragmentMoviesDetails().also {
+        fun create(movieData: Int) = FragmentMoviesDetails().also {
             val args = bundleOf(
                 PARAM_MOVIE_DATA to movieData
             )
