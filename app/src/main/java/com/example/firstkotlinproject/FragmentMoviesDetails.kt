@@ -94,7 +94,14 @@ class FragmentMoviesDetails : Fragment() {
     private fun updateMovieDetailsInfo(movie : Movie) {
 //        view?.findViewById<ImageView>(R.id.imageDetail)
 //            ?.setImageResource(movie.detailImageRes)
-        Glide.with(requireContext()).load(movie.detailImageRes).into(view?.findViewById(R.id.imageDetail))
+        val context = view?.context
+        if (context != null) {
+            view?.findViewById<ImageView>(R.id.imageDetail)?.let {
+                Glide.with(context).load(movie.detailImageRes).into(
+                    it
+                )
+            }
+        }
 
         view?.findViewById<TextView>(R.id.yearsDetail)?.text =
             context?.getString(R.string._13, movie.years)
