@@ -59,6 +59,10 @@ class FragmentMoviesDetails : Fragment() {
             val adapter = MovieDetailAdapter()
 
             this.adapter = adapter
+        }
+        view.findViewById<View>(R.id.back_button_layout).setOnClickListener{
+            listener?.onMovieDeselected()
+        }
 
 //            adapter.submitList(movieData.actors)
             scopeDetails.launch {
@@ -70,8 +74,6 @@ class FragmentMoviesDetails : Fragment() {
                     errorWasFound()
                 }
             }
-        }
-
     }
 
     private fun errorWasFound(){
