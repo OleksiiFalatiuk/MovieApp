@@ -1,4 +1,4 @@
-package com.example.firstkotlinproject
+package com.example.firstkotlinproject.moviedetails
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -16,8 +16,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.firstkotlinproject.adapters.MovieDetailAdapter
-import com.example.firstkotlinproject.model.Actor
+import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*

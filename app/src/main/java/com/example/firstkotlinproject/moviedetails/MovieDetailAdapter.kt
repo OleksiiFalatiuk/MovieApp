@@ -1,4 +1,4 @@
-package com.example.firstkotlinproject.adapters
+package com.example.firstkotlinproject.moviedetails
 
 import android.view.LayoutInflater
 import android.view.View

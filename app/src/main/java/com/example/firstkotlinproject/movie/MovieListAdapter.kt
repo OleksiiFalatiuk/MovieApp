@@ -1,4 +1,4 @@
-package com.example.firstkotlinproject.adapters
+package com.example.firstkotlinproject.movie
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.model.Movie
 
 class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
-    ListAdapter<Movie,MovieListAdapter.ViewHolder>(DiffCallback()) {
+    ListAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback()) {
 
     private var list = listOf<Movie>()
 //    var itemclick: ItemClickListener? = null

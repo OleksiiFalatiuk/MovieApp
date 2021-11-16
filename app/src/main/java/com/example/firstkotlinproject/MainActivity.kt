@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.example.firstkotlinproject.data.JsonMovieRepository
 import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.model.Movie
+import com.example.firstkotlinproject.movie.FragmentMovieList
+import com.example.firstkotlinproject.moviedetails.FragmentMoviesDetails
 import com.example.firstkotlinproject.provider.MovieProvider
 
 
@@ -21,12 +23,6 @@ class MainActivity : AppCompatActivity(),
         if (savedInstanceState == null) {
             toMoviesList()
         }
-
-//        supportFragmentManager.beginTransaction().apply {
-//            add(R.id.flMain, FragmentMovieList())
-//            commit()
-//        }
-
     }
 
     override fun onMovieSelected(movie: Movie) {

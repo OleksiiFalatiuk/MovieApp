@@ -1,4 +1,4 @@
-package com.example.firstkotlinproject
+package com.example.firstkotlinproject.movie
 
 import android.content.Context
 import android.os.Bundle
@@ -6,20 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firstkotlinproject.adapters.MovieListAdapter
+import com.example.firstkotlinproject.R
+import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*
-
-//import com.example.firstkotlinproject.domain.MovieData
 
 
 class FragmentMovieList : Fragment() {
     @DelicateCoroutinesApi
     private val scopeList = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var recycler: RecyclerView? = null
+
+    private val viewModel: MovieViewModel by viewModels {
+        MovieViewModelFactory((requireActivity() as MovieProvider).provideMovie())
+    }
 
     private var listener: MoviesListItemClickListener? = null
 
@@ -45,9 +49,6 @@ class FragmentMovieList : Fragment() {
 
     @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        recycler = view.findViewById(R.id.rvActors)
-//        recycler?.adapter = MovieListAdapter()
-//        (recycler?.adapter as? MovieListAdapter)?.itemclick = this
         view.findViewById<RecyclerView>(R.id.rvActors).apply {
             this.layoutManager = GridLayoutManager(this.context, 2)
 
@@ -57,9 +58,8 @@ class FragmentMovieList : Fragment() {
 
             this.adapter = adapter
             loadDataToListAdapter(adapter)
-//            adapter.submitList(MovieData.getMovie())
-        }
 
+        }
     }
 
     @DelicateCoroutinesApi
@@ -71,27 +71,6 @@ class FragmentMovieList : Fragment() {
         }
     }
 
-//    override fun onStart() {
-//        updateData()
-//        super.onStart()
-//    }
-
-//    private fun updateData() {
-//        (recycler?.adapter as? MovieListAdapter)?.apply {
-//            bindActors(MovieData().getMovie())
-//        }
-//    }
-//
-//    override fun onItemClick(movieData: Movie) {
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.replace(
-//                R.id.container,
-//                FragmentMoviesDetails.create(movieData),
-//                FragmentMoviesDetails::class.java.simpleName
-//            )
-//            ?.addToBackStack("trans:${FragmentMoviesDetails::class.java.simpleName}")
-//            ?.commit()
-//        }
 
 
     override fun onDetach() {
