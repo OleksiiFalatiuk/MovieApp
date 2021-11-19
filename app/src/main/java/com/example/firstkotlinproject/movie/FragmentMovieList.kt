@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.data.MovieRepository
+
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*
@@ -19,7 +21,7 @@ import kotlinx.coroutines.*
 class FragmentMovieList : Fragment() {
     @DelicateCoroutinesApi
     private val scopeList = CoroutineScope(Dispatchers.Main + SupervisorJob())
-    private var recycler: RecyclerView? = null
+    private val adapter: MovieListAdapter? = null
 
     private val viewModel: MovieViewModel by viewModels {
         MovieViewModelFactory((requireActivity() as MovieProvider).provideMovie())
@@ -58,20 +60,22 @@ class FragmentMovieList : Fragment() {
 
             this.adapter = adapter
             loadDataToListAdapter(adapter)
-
         }
     }
 
     @DelicateCoroutinesApi
     private fun loadDataToListAdapter(adapter: MovieListAdapter){
-        val provider = (requireActivity() as MovieProvider).provideMovie()
+//        val provider = (requireActivity() as MovieProvider).provideMovie()
+//        scopeList.launch {
+//            val moviesData = provider.loadMovies()
+//            adapter.submitList(moviesData)
+//        }
         scopeList.launch {
-            val moviesData = provider.loadMovies()
-            adapter.submitList(moviesData)
+            viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
+                adapter.submitList(movieList)
+            })
         }
     }
-
-
 
     override fun onDetach() {
         listener = null

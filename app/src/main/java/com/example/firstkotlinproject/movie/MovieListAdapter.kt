@@ -19,7 +19,7 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
     ListAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback()) {
 
     private var list = listOf<Movie>()
-//    var itemclick: ItemClickListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -30,18 +30,9 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
         holder.bind(movie,onClickCard)
-//        holder.itemView.apply {
-//            setOnClickListener {
-//                itemclick?.onItemClick(movie)
-//            }
-//        }
+
     }
 
-
-//    fun bindActors(newMovie: List<Movie>) {
-//        list = newMovie
-//        notifyDataSetChanged()
-//    }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -102,9 +93,7 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
 
     }
 
-//    interface ItemClickListener {
-//        fun onItemClick(movieData: Movie)
-//    }
+
 
     class DiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -114,8 +103,6 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem == newItem
         }
-
-
     }
 }
 
