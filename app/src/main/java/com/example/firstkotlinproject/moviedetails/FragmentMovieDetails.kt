@@ -22,7 +22,7 @@ import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*
 
 
-class FragmentMoviesDetails : Fragment() {
+class FragmentMovieDetails : Fragment() {
 
     var listener: MovieDetailsBackClickListener? = null
     @DelicateCoroutinesApi
@@ -93,8 +93,6 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun updateMovieDetailsInfo(movie : Movie) {
-//        view?.findViewById<ImageView>(R.id.imageDetail)
-//            ?.setImageResource(movie.detailImageRes)
         val context = view?.context
         if (context != null) {
             view?.findViewById<ImageView>(R.id.imageDetail)?.let {
@@ -153,7 +151,7 @@ class FragmentMoviesDetails : Fragment() {
     companion object {
         private const val PARAM_MOVIE_DATA = "movie_data"
 
-        fun create(movieData: Int) = FragmentMoviesDetails().also {
+        fun create(movieData: Int) = FragmentMovieDetails().also {
             val args = bundleOf(
                 PARAM_MOVIE_DATA to movieData
             )

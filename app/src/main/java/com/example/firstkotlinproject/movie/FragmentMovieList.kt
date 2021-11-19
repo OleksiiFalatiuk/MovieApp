@@ -21,8 +21,6 @@ import kotlinx.coroutines.*
 class FragmentMovieList : Fragment() {
     @DelicateCoroutinesApi
     private val scopeList = CoroutineScope(Dispatchers.Main + SupervisorJob())
-    private val adapter: MovieListAdapter? = null
-
     private val viewModel: MovieViewModel by viewModels {
         MovieViewModelFactory((requireActivity() as MovieProvider).provideMovie())
     }

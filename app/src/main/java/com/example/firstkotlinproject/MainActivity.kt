@@ -6,13 +6,13 @@ import com.example.firstkotlinproject.data.JsonMovieRepository
 import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.movie.FragmentMovieList
-import com.example.firstkotlinproject.moviedetails.FragmentMoviesDetails
+import com.example.firstkotlinproject.moviedetails.FragmentMovieDetails
 import com.example.firstkotlinproject.provider.MovieProvider
 
 
 class MainActivity : AppCompatActivity(),
     FragmentMovieList.MoviesListItemClickListener,
-    FragmentMoviesDetails.MovieDetailsBackClickListener,MovieProvider {
+    FragmentMovieDetails.MovieDetailsBackClickListener,MovieProvider {
 
     private val jsonMovieRepository = JsonMovieRepository(this)
 
@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.flMain,
-                FragmentMoviesDetails.create(movie.id),
-                FragmentMoviesDetails::class.java.simpleName
+                FragmentMovieDetails.create(movie.id),
+                FragmentMovieDetails::class.java.simpleName
             )
-            .addToBackStack("trans:${FragmentMoviesDetails::class.java.simpleName}")
+            .addToBackStack("trans:${FragmentMovieDetails::class.java.simpleName}")
             .commit()
     }
 
