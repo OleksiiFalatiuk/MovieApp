@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.ImageViewCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,9 +26,13 @@ import kotlinx.coroutines.*
 
 class FragmentMovieDetails : Fragment() {
 
-    var listener: MovieDetailsBackClickListener? = null
+    private var listener: MovieDetailsBackClickListener? = null
     @DelicateCoroutinesApi
     private val scopeDetails = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
+    private val viewDetailModel: MovieDetailViewModel by viewModels{
+        MovieDetailViewModelFactory((requireActivity() as MovieProvider).provideMovie())
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,8 +55,6 @@ class FragmentMovieDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val movieData = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Int ?: return
 
-//        updateMovieDetailsInfo(movieData)
-
         view.findViewById<RecyclerView>(R.id.recycler_movies).apply {
 
             this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -62,16 +66,16 @@ class FragmentMovieDetails : Fragment() {
         view.findViewById<View>(R.id.back_button_layout).setOnClickListener{
             listener?.onMovieDeselected()
         }
+        viewDetailModel.loadMovie(movieData)
 
-//            adapter.submitList(movieData.actors)
             scopeDetails.launch {
-                val provider = (requireActivity() as MovieProvider).provideMovie()
-                val detailsData = provider.loadMovie(movieData)
-                if (detailsData != null){
-                    bindUI(view,detailsData)
-                }else{
-                    errorWasFound()
-                }
+                viewDetailModel.loadingMovieDetailLiveData.observe(viewLifecycleOwner, Observer { movie ->
+                    if(movie != null){
+                        bindUI(view,movie)
+                    }else{
+                       errorWasFound()
+                    }
+                })
             }
     }
 
@@ -101,7 +105,6 @@ class FragmentMovieDetails : Fragment() {
                 )
             }
         }
-
         view?.findViewById<TextView>(R.id.yearsDetail)?.text =
             context?.getString(R.string._13, movie.years)
 
@@ -132,17 +135,6 @@ class FragmentMovieDetails : Fragment() {
 
 
     }
-
-//    override fun onStart() {
-//        updateData()
-//        super.onStart()
-//    }
-//
-//    private fun updateData() {
-//        (recyclerDetail?.adapter as? MovieDetailAdapter)?.apply {
-//            bindActorsDetail(DetailData().getDetail())
-//        }
-//    }
 
     interface MovieDetailsBackClickListener {
         fun onMovieDeselected()

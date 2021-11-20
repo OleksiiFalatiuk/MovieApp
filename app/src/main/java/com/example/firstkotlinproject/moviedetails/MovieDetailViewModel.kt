@@ -13,7 +13,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository): ViewMo
     private val _loadingMovieDetailLiveData = MutableLiveData<Movie?>(null)
     val loadingMovieDetailLiveData : LiveData<Movie?> = _loadingMovieDetailLiveData
 
-    private fun loadMovie(movieId: Int){
+    fun loadMovie(movieId: Int){
        viewModelScope.launch {
            _loadingMovieDetailLiveData.value = movieRepository.loadMovie(movieId)
        }
