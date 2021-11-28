@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ConfigurationResponse (
-    @SerialName("images") val images: List<ImageResponse>
+    @SerialName("images") val images: ImageResponse
 )

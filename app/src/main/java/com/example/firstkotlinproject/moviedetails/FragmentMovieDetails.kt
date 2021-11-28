@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.R
-import com.example.firstkotlinproject.model.Movie
+import com.example.firstkotlinproject.model.MovieDetails
 import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*
 
@@ -84,7 +84,7 @@ class FragmentMovieDetails : Fragment() {
             .show()
     }
 
-    private fun bindUI(view: View, movie:Movie){
+    private fun bindUI(view: View, movie:MovieDetails){
         updateMovieDetailsInfo(movie)
         val adapter = view.findViewById<RecyclerView>(R.id.recycler_movies).adapter as MovieDetailAdapter
         adapter.submitList(movie.actors)
@@ -96,7 +96,7 @@ class FragmentMovieDetails : Fragment() {
         super.onDetach()
     }
 
-    private fun updateMovieDetailsInfo(movie : Movie) {
+    private fun updateMovieDetailsInfo(movie : MovieDetails) {
         val context = view?.context
         if (context != null) {
             view?.findViewById<ImageView>(R.id.imageDetail)?.let {

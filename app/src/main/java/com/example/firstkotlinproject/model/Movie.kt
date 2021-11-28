@@ -12,9 +12,6 @@ data class Movie(
     val review: Int,
     val isLiked: Boolean,
     val rating: Int,
-    val avatar: String,
-    val detailImageRes: String,
-    val storyLine: String,
-    val actors: List<Actor>
+    val avatar: String?
 )
 
