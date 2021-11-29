@@ -53,7 +53,8 @@ class FragmentMovieDetails : Fragment() {
 
     @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val movieData = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Int ?: return
+        val movieId = arguments?.getSerializable(PARAM_MOVIE_DATA) as? Int ?: return
+        val actorId = arguments?.getSerializable(PARAM_ACTOR_DATA) as Int ?: return
 
         view.findViewById<RecyclerView>(R.id.recycler_movies).apply {
 
@@ -66,7 +67,7 @@ class FragmentMovieDetails : Fragment() {
         view.findViewById<View>(R.id.back_button_layout).setOnClickListener{
             listener?.onMovieDeselected()
         }
-        viewDetailModel.loadMovie(movieData)
+        viewDetailModel.loadMovie(movieId,actorId)
 
             scopeDetails.launch {
                 viewDetailModel.loadingMovieDetailLiveData.observe(viewLifecycleOwner, Observer { movie ->
@@ -141,11 +142,13 @@ class FragmentMovieDetails : Fragment() {
     }
 
     companion object {
-        private const val PARAM_MOVIE_DATA = "movie_data"
+        private const val PARAM_MOVIE_DATA = "movie_id"
+        private const val PARAM_ACTOR_DATA = "actor_id"
 
-        fun create(movieData: Int) = FragmentMovieDetails().also {
+        fun create(movieId: Int,actorId: Int) = FragmentMovieDetails().also {
             val args = bundleOf(
-                PARAM_MOVIE_DATA to movieData
+                PARAM_MOVIE_DATA to movieId,
+                PARAM_ACTOR_DATA to actorId
             )
             it.arguments = args
         }

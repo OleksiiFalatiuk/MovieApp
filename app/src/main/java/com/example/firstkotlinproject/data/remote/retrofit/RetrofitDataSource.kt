@@ -2,6 +2,8 @@ package com.example.firstkotlinproject.data.remote.retrofit
 
 import com.example.firstkotlinproject.data.remote.RemoteDataSource
 import com.example.firstkotlinproject.data.remote.retrofit.response.ImageResponse
+import com.example.firstkotlinproject.model.Actor
+import com.example.firstkotlinproject.model.Genre
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
 
@@ -18,12 +20,58 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
     private var profileSize: String? = null
 
 
-    override suspend fun loadMovies(): List<Movie> {
-        TODO("Not yet implemented")
+    override suspend fun loadMovies(movieId: Int): List<Movie> {
+        sendConfiguration()
+        val genre = api.getDetails(movieId).genres
+        return api.getTopRated(page = 1).results.map {movie ->
+            Movie(
+                id = movie.id,
+                years = if (movie.adult) 16 else 13,
+                name = movie.title,
+                time = 120,
+                review = movie.voteCount,
+                isLiked = false,
+                rating = movie.popularity.toInt(),
+                avatar = formingImage(baseUrl,posterSize,movie.posterPath),
+                genre = genre
+                    .filter { genreResponse ->
+                    movie.genreId.contains(genreResponse.idGenre)
+                }
+                    .map { genre->
+                        Genre(
+                          genre.idGenre,
+                          genre.nameGenre
+                        )
+                    }
+            )
+        }
     }
 
-    override suspend fun loadMovie(movieId: Int): MovieDetails {
-        TODO("Not yet implemented")
+    override suspend fun loadMovie(movieId: Int,personId: Int): MovieDetails {
+        sendConfiguration()
+        val actors = api.getActors(personId)
+        val details = api.getDetails(movieId)
+        return MovieDetails(
+            id = details.id,
+            years = if (details.adult) 16 else 13,
+            name = details.originalTitle,
+            review = details.runtime.toInt(),
+            isLiked = false,
+            rating = details.popularity.toInt(),
+            storyLine = details.overview,
+            detailImageRes = formingImage(baseUrl,backdropSize,details.backdropPath),
+            genre = details.genres.map { genre ->
+                Genre(
+                    genre.idGenre,
+                    genre.nameGenre
+                )
+            },
+            actors = Actor(
+                id = actors.id,
+                name = actors.name,
+                imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
+            )
+        )
     }
 
     private suspend fun sendConfiguration(){

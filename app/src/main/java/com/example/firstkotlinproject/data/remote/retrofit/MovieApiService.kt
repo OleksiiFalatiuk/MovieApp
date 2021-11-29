@@ -7,6 +7,7 @@ import com.example.firstkotlinproject.data.remote.retrofit.response.TopRatedResp
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApiService {
 
@@ -14,7 +15,9 @@ interface MovieApiService {
     suspend fun getConfiguration(): ConfigurationResponse
 
     @GET("movie/top_rated")
-    suspend fun getTopRated(): TopRatedResponse
+    suspend fun getTopRated(
+        @Query("page") page: Int
+    ): TopRatedResponse
 
     @GET("movie/{movie_id}")
     suspend fun getDetails(

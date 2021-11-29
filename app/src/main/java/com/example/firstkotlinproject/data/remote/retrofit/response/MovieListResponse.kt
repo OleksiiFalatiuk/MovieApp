@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class MovieListResponse(
-
     @SerialName("poster_path")
     val posterPath: String,
     @SerialName("adult")

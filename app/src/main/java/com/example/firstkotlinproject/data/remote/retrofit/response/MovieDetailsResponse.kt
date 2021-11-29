@@ -20,7 +20,5 @@ class MovieDetailsResponse(
     @SerialName("popularity")
     val popularity: Double,
     @SerialName("runtime")
-    val runtime: Long,
-    @SerialName("title")
-    val title: String
+    val runtime: Long
 )
