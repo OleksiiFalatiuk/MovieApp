@@ -1,5 +1,6 @@
 package com.example.firstkotlinproject.movie
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +14,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.R
+import com.example.firstkotlinproject.model.Actor
 import com.example.firstkotlinproject.model.Movie
+import java.util.ArrayList
 
-class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
+class MovieListAdapter(private val onClickCard: (movieId: Int, actorId: Int) -> Unit) :
     ListAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback()) {
 
-    private var list = listOf<Movie>()
+
+    private var arrayList = listOf<Actor>()
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,8 +34,8 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
-        holder.bind(movie,onClickCard)
-
+        val actor = arrayList[position]
+        holder.bind(movie,actor,onClickCard)
     }
 
 
@@ -51,7 +56,9 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
         private val name: TextView? = itemView.findViewById(R.id.tvName)
         private val time: TextView? = itemView.findViewById(R.id.tvTime)
 
-        fun bind(item: Movie,onClickCard: (item: Movie) -> Unit) {
+        fun bind(
+            item: Movie,actor: Actor,onClickCard: (movieId: Int, actorId: Int) -> Unit
+        ) {
 //            avatar?.setImageResource(item.avatar)
             val context = itemView.context
             if (avatar != null) {
@@ -87,7 +94,7 @@ class MovieListAdapter(private val onClickCard: (item: Movie) -> Unit) :
             }
 
             avatar?.setOnClickListener {
-                onClickCard(item)
+                onClickCard(item.id.toInt(), actor.id.toInt())
             }
         }
 

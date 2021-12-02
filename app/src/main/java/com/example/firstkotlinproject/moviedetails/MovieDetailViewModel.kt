@@ -10,7 +10,7 @@ import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel(private val movieRepository: RemoteDataSource): ViewModel() {
+class MovieDetailViewModel(private val movieRepository: MovieRepository): ViewModel() {
 
     private val _loadingMovieDetailLiveData = MutableLiveData<MovieDetails?>(null)
     val loadingMovieDetailLiveData : LiveData<MovieDetails?> = _loadingMovieDetailLiveData

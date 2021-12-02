@@ -11,9 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstkotlinproject.R
-import com.example.firstkotlinproject.data.MovieRepository
 
-import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.provider.MovieProvider
 import kotlinx.coroutines.*
 
@@ -43,7 +41,6 @@ class FragmentMovieList : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
-
         return view
     }
 
@@ -52,8 +49,8 @@ class FragmentMovieList : Fragment() {
         view.findViewById<RecyclerView>(R.id.rvActors).apply {
             this.layoutManager = GridLayoutManager(this.context, 2)
 
-            val adapter = MovieListAdapter { movieData ->
-                listener?.onMovieSelected(movieData)
+            val adapter = MovieListAdapter { movieId,actorId ->
+                listener?.onMovieSelected(movieId, actorId)
             }
 
             this.adapter = adapter
@@ -68,6 +65,7 @@ class FragmentMovieList : Fragment() {
 //            val moviesData = provider.loadMovies()
 //            adapter.submitList(moviesData)
 //        }
+
         scopeList.launch {
             viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
                 adapter.submitList(movieList)
@@ -82,7 +80,7 @@ class FragmentMovieList : Fragment() {
     }
 
     interface MoviesListItemClickListener {
-        fun onMovieSelected(movieData: Movie)
+        fun onMovieSelected(movieId: Int,actorId: Int)
     }
 
 

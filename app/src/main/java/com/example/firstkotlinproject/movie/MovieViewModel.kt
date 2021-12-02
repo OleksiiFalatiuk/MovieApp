@@ -13,6 +13,7 @@ class MovieViewModel(private val movieRep: MovieRepository): ViewModel() {
     private val _loadingMovieLiveData = MutableLiveData<List<Movie>>(emptyList())
     val loadingMovieLiveData : LiveData<List<Movie>> = _loadingMovieLiveData
 
+
     init {
         loadMovies()
     }

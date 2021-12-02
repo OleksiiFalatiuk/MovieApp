@@ -12,8 +12,8 @@ import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class NetworkModule{
-    private val basicUrl: String = "https://api.themoviedb.org/3/"
-
+    private val baseUrl = "https://api.themoviedb.org/"
+    private val version = "3/"
     private val json = Json {
         prettyPrint = true
         ignoreUnknownKeys = true
@@ -37,7 +37,7 @@ class NetworkModule{
 
     @ExperimentalSerializationApi
     private val retrofitBuilder = Retrofit.Builder()
-        .baseUrl(basicUrl)
+        .baseUrl(baseUrl + version)
         .client(httpClient)
         .addConverterFactory(json.asConverterFactory(contentType))
         .build()
@@ -53,10 +53,16 @@ class ApiInterceptor: Interceptor{
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val original: Request = chain.request()
-        val request = original.newBuilder()
-            .header("api-key", API)
+        val origin = chain.request()
+        val urlBuilder = origin.url.newBuilder()
+        val url = urlBuilder
+            .addQueryParameter("api_key", API)
             .build()
+
+        val requestBuilder = origin.newBuilder()
+            .url(url)
+
+        val request = requestBuilder.build()
         return chain.proceed(request)
     }
 }

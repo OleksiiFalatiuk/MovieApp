@@ -20,9 +20,9 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
     private var profileSize: String? = null
 
 
-    override suspend fun loadMovies(movieId: Int): List<Movie> {
+    override suspend fun loadMovies(): List<Movie> {
         sendConfiguration()
-        val genre = api.getDetails(movieId).genres
+        val genre = api.loadGenres().genres
         return api.getTopRated(page = 1).results.map {movie ->
             Movie(
                 id = movie.id,
@@ -66,10 +66,12 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
                     genre.nameGenre
                 )
             },
-            actors = Actor(
-                id = actors.id,
-                name = actors.name,
-                imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
+            actors = listOf(
+                Actor(
+                    id = actors.id,
+                    name = actors.name,
+                    imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
+                )
             )
         )
     }

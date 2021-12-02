@@ -1,9 +1,6 @@
 package com.example.firstkotlinproject.data.remote.retrofit
 
-import com.example.firstkotlinproject.data.remote.retrofit.response.ActorsResponse
-import com.example.firstkotlinproject.data.remote.retrofit.response.ConfigurationResponse
-import com.example.firstkotlinproject.data.remote.retrofit.response.MovieDetailsResponse
-import com.example.firstkotlinproject.data.remote.retrofit.response.TopRatedResponse
+import com.example.firstkotlinproject.data.remote.retrofit.response.*
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.Path
@@ -13,6 +10,9 @@ interface MovieApiService {
 
     @GET("configuration")
     suspend fun getConfiguration(): ConfigurationResponse
+
+    @GET("genre/movie/list")
+    suspend fun loadGenres(): GenresResponse
 
     @GET("movie/top_rated")
     suspend fun getTopRated(
