@@ -47,9 +47,8 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
         }
     }
 
-    override suspend fun loadMovie(movieId: Int,personId: Int): MovieDetails {
+    override suspend fun loadMovie(movieId: Int): MovieDetails {
         sendConfiguration()
-        val actors = api.getActors(personId)
         val details = api.getDetails(movieId)
         return MovieDetails(
             id = details.id,
@@ -66,13 +65,20 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
                     genre.nameGenre
                 )
             },
-            actors = listOf(
-                Actor(
+//            actors = listOf(
+//                Actor(
+//                    id = actors.id,
+//                    name = actors.name,
+//                    imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
+//                )
+//            )
+        actors = api.loadMovieCredits(movieId).casts.map { actors ->
+            Actor(
                     id = actors.id,
                     name = actors.name,
                     imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
                 )
-            )
+        }
         )
     }
 
@@ -87,11 +93,11 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
         }
     }
 
-    private fun formingImage(url: String?, size: String?, path: String?){
-        if (url == null || path == null){
+    private fun formingImage(url: String?, size: String?, path: String?): String? {
+        return if (url == null || path == null) {
             null
-        }else{
-            url.plus(size.takeUnless { it.isNullOrEmpty() }?: DEFAULT_SIZE).plus(path)
+        } else {
+            url.plus(size.takeUnless { it.isNullOrEmpty() } ?: DEFAULT_SIZE).plus(path)
         }
     }
 

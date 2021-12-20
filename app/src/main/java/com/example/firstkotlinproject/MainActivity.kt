@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onMovieSelected(movieId: Int,actorId: Int) {
-        toMovieDetails(movieId,actorId)
+    override fun onMovieSelected(movieId: Int) {
+        toMovieDetails(movieId)
     }
 
     override fun onMovieDeselected() {
@@ -51,11 +51,11 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    private fun toMovieDetails(movieId: Int,actorId: Int) {
+    private fun toMovieDetails(movieId: Int) {
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.flMain,
-                FragmentMovieDetails.create(movieId,actorId),
+                FragmentMovieDetails.create(movieId),
                 FragmentMovieDetails::class.java.simpleName
             )
             .addToBackStack("trans:${FragmentMovieDetails::class.java.simpleName}")

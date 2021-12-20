@@ -18,11 +18,12 @@ import com.example.firstkotlinproject.model.Actor
 import com.example.firstkotlinproject.model.Movie
 import java.util.ArrayList
 
-class MovieListAdapter(private val onClickCard: (movieId: Int, actorId: Int) -> Unit) :
+class MovieListAdapter(private val onClickCard: (movieId: Int) -> Unit) :
     ListAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback()) {
 
 
     private var arrayList = listOf<Actor>()
+
 
 
 
@@ -34,8 +35,7 @@ class MovieListAdapter(private val onClickCard: (movieId: Int, actorId: Int) -> 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
-        val actor = arrayList[position]
-        holder.bind(movie,actor,onClickCard)
+        holder.bind(movie,onClickCard)
     }
 
 
@@ -57,7 +57,7 @@ class MovieListAdapter(private val onClickCard: (movieId: Int, actorId: Int) -> 
         private val time: TextView? = itemView.findViewById(R.id.tvTime)
 
         fun bind(
-            item: Movie,actor: Actor,onClickCard: (movieId: Int, actorId: Int) -> Unit
+            item: Movie,onClickCard: (movieId: Int) -> Unit
         ) {
 //            avatar?.setImageResource(item.avatar)
             val context = itemView.context
@@ -94,7 +94,7 @@ class MovieListAdapter(private val onClickCard: (movieId: Int, actorId: Int) -> 
             }
 
             avatar?.setOnClickListener {
-                onClickCard(item.id.toInt(), actor.id.toInt())
+                onClickCard(item.id.toInt())
             }
         }
 

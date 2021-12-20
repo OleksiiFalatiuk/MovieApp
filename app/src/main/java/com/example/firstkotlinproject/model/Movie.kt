@@ -9,6 +9,6 @@ data class Movie(
     val review: Long,
     val isLiked: Boolean,
     val rating: Int,
-    val avatar: Unit
+    val avatar: String?
 )
 

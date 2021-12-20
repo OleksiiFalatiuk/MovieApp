@@ -5,5 +5,5 @@ import com.example.firstkotlinproject.model.MovieDetails
 
 interface RemoteDataSource {
     suspend fun loadMovies(): List<Movie>
-    suspend fun loadMovie(movieId: Int, personId: Int): MovieDetails
+    suspend fun loadMovie(movieId: Int): MovieDetails
 }

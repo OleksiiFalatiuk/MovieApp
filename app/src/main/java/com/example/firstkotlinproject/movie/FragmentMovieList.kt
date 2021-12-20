@@ -49,8 +49,8 @@ class FragmentMovieList : Fragment() {
         view.findViewById<RecyclerView>(R.id.rvActors).apply {
             this.layoutManager = GridLayoutManager(this.context, 2)
 
-            val adapter = MovieListAdapter { movieId,actorId ->
-                listener?.onMovieSelected(movieId, actorId)
+            val adapter = MovieListAdapter { movieId ->
+                listener?.onMovieSelected(movieId)
             }
 
             this.adapter = adapter
@@ -80,7 +80,7 @@ class FragmentMovieList : Fragment() {
     }
 
     interface MoviesListItemClickListener {
-        fun onMovieSelected(movieId: Int,actorId: Int)
+        fun onMovieSelected(movieId: Int)
     }
 
 

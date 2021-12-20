@@ -3,7 +3,7 @@ package com.example.firstkotlinproject.model
 import java.io.Serializable
 
 data class Actor(
-    val id: Long,
+    val id: Int,
     val name: String,
-    val imageRes: Unit,
+    val imageRes: String?,
 ): Serializable
