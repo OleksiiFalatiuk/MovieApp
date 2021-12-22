@@ -65,13 +65,6 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
                     genre.nameGenre
                 )
             },
-//            actors = listOf(
-//                Actor(
-//                    id = actors.id,
-//                    name = actors.name,
-//                    imageRes = formingImage(baseUrl,profileSize,actors.profilePath)
-//                )
-//            )
         actors = api.loadMovieCredits(movieId).casts.map { actors ->
             Actor(
                     id = actors.id,

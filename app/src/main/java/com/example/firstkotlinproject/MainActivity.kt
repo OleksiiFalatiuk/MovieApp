@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(),
     FragmentMovieList.MoviesListItemClickListener,
     FragmentMovieDetails.MovieDetailsBackClickListener,MovieProvider {
 
-//    private val jsonMovieRepository = JsonMovieRepository(this)
+
     private val networkModule = NetworkModule()
     @ExperimentalSerializationApi
     private val retrofitDataSource = RetrofitDataSource(networkModule.api)

@@ -22,11 +22,6 @@ class MovieListAdapter(private val onClickCard: (movieId: Int) -> Unit) :
     ListAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback()) {
 
 
-    private var arrayList = listOf<Actor>()
-
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false)
@@ -59,7 +54,6 @@ class MovieListAdapter(private val onClickCard: (movieId: Int) -> Unit) :
         fun bind(
             item: Movie,onClickCard: (movieId: Int) -> Unit
         ) {
-//            avatar?.setImageResource(item.avatar)
             val context = itemView.context
             if (avatar != null) {
                 Glide.with(context).load(item.avatar).into(avatar)
@@ -83,7 +77,7 @@ class MovieListAdapter(private val onClickCard: (movieId: Int) -> Unit) :
                 )
             )
 
-            //set stars tint
+
             starsImages.forEachIndexed { index, imageView ->
                 val colorId = if (item.rating > index) R.color.pink else R.color.gray_dark
                 ImageViewCompat.setImageTintList(
