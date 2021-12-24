@@ -24,11 +24,6 @@ interface MovieApiService {
         @Path("movie_id") movieId: Int
     ): MovieDetailsResponse
 
-    @GET("person/{person_id}")
-    suspend fun getActors(
-        @Path("person_id") personId: Int
-    ): ActorsResponse
-
     @GET("movie/{movie_id}/credits")
     suspend fun loadMovieCredits(
         @Path("movie_id") movieId: Int

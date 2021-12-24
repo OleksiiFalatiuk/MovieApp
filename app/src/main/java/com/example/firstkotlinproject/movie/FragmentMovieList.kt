@@ -60,12 +60,6 @@ class FragmentMovieList : Fragment() {
 
     @DelicateCoroutinesApi
     private fun loadDataToListAdapter(adapter: MovieListAdapter){
-//        val provider = (requireActivity() as MovieProvider).provideMovie()
-//        scopeList.launch {
-//            val moviesData = provider.loadMovies()
-//            adapter.submitList(moviesData)
-//        }
-
         scopeList.launch {
             viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
                 adapter.submitList(movieList)
