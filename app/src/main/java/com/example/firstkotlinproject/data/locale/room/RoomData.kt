@@ -1,6 +1,7 @@
 package com.example.firstkotlinproject.data.locale.room
 
 import com.example.firstkotlinproject.data.locale.LocaleDataSource
+import com.example.firstkotlinproject.model.Actor
 import com.example.firstkotlinproject.model.Genre
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
@@ -29,14 +30,62 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
     }
 
     override fun insertMovies(movieFromApi: List<Movie>) {
-        TODO("Not yet implemented")
+        val db = movieFromApi.map { movie ->
+            MovieDbEntity(
+                id = movie.id,
+                years = movie.years,
+                name = movie.name,
+                time = movie.time,
+                review = movie.review,
+                isLiked = false,
+                rating = movie.rating,
+                avatar = movie.avatar
+            )
+        }
+        appDb.getMoviesDao().insertMovies(db)
     }
 
-    override suspend fun loadMovie(movieId: Int): MovieDetails {
-        TODO("Not yet implemented")
+    override suspend fun loadMovie(movieId: Int): List<MovieDetails> {
+        return appDb.getMovieDetailsDao().getMovieDetails().map { detail ->
+            MovieDetails(
+                id = detail.movieDetails.detailsId,
+                years = detail.movieDetails.years,
+                name = detail.movieDetails.name,
+                genre = detail.genre.map { genre ->
+                    Genre(
+                        id = genre.id,
+                        name = genre.name
+                    )
+                },
+                review = detail.movieDetails.review,
+                isLiked = false,
+                rating = detail.movieDetails.rating,
+                detailImageRes = detail.movieDetails.detailImageRes,
+                storyLine = detail.movieDetails.storyLine,
+                actors = detail.actors.map { actor ->
+                    Actor(
+                        id = actor.id,
+                        name = actor.name,
+                        imageRes = actor.imageRes
+                    )
+                }
+            )
+        }
     }
 
     override fun insertMovieDetails(detailsFromApi: List<MovieDetails>) {
-        TODO("Not yet implemented")
+        val dbDetails = detailsFromApi.map { details ->
+            MovieDetailsDbEntity(
+                detailsId = details.id,
+                years = details.years,
+                name = details.name,
+                review = details.review,
+                isLiked = false,
+                rating = details.rating,
+                detailImageRes = details.detailImageRes,
+                storyLine = details.storyLine
+            )
+        }
+        appDb.getMovieDetailsDao().insertMovieDetails(dbDetails)
     }
 }

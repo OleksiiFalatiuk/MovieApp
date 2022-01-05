@@ -11,7 +11,7 @@ class MovieRepositoryImpl(
         return remoteDataResource.loadMovies()
     }
 
-    override suspend fun loadMovie(movieId: Int): MovieDetails? {
+    override suspend fun loadMovie(movieId: Int): MovieDetails {
         return remoteDataResource.loadMovie(movieId)
     }
 }
