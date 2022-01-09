@@ -11,7 +11,10 @@ import kotlinx.coroutines.launch
 class MovieViewModel(private val movieRep: MovieRepository): ViewModel() {
 
     private val _loadingMovieLiveData = MutableLiveData<List<Movie>>(emptyList())
+    private val _errorMessageForMovieLiveData = MutableLiveData<String>()
+
     val loadingMovieLiveData : LiveData<List<Movie>> = _loadingMovieLiveData
+    val errorMessageForMovieLiveData : LiveData<String> = _errorMessageForMovieLiveData
 
 
     init {
