@@ -6,6 +6,8 @@ import com.example.firstkotlinproject.data.remote.RemoteDataSource
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
 import com.example.firstkotlinproject.result.Result
+import com.example.firstkotlinproject.result.checkResult
+import com.example.firstkotlinproject.result.checkResultDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -15,28 +17,30 @@ class MovieRepositoryImplNew(
 ): MovieRepository {
 
     override suspend fun loadMovies(): Result<List<Movie>> {
-        return withContext(Dispatchers.IO) {
+        return checkResult {
+            withContext(Dispatchers.IO) {
                 val movieDB = localData.loadMovies()
-                if (movieDB.isEmpty()) {
+                (if (movieDB.isEmpty()) {
                     val movieFromNetwork = remoteData.loadMovies()
                     localData.insertMovies(movieFromNetwork)
                     movieFromNetwork
                 } else {
                     movieDB
-                }
+                })
             }
+        }
     }
 
-    override suspend fun loadMovie(movieId: Int): MovieDetails {
-        return withContext(Dispatchers.IO){
-            val movieDetailsDB = localData.loadMovie(movieId)
-            if (movieDetailsDB.isEmpty()){
-                val detailsFromNetwork = remoteData.loadMovie(movieId)
-                localData.insertMovieDetails(listOf(detailsFromNetwork))
-                detailsFromNetwork
-            }else{
-                movieDetailsDB
-            }
-        } as MovieDetails
+    override suspend fun loadMovie(movieId: Int): Result<MovieDetails> {
+        return checkResultDetails { remoteData.loadMovie(movieId) }
     }
 }
+
+//                val movieDetailsDB = localData.loadMovie(movieId)
+//                if (movieDetailsDB.isEmpty()){
+//                    val detailsFromNetwork = remoteData.loadMovie(movieId)
+//                    localData.insertMovieDetails(listOf(detailsFromNetwork))
+//                    detailsFromNetwork
+//                }else{
+//                    movieDetailsDB
+//                }

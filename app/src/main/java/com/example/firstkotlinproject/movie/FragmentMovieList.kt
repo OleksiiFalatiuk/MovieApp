@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -65,6 +66,15 @@ class FragmentMovieList : Fragment() {
                 adapter.submitList(movieList)
             })
         }
+        scopeList.launch {
+            viewModel.errorMessageForMovieLiveData.observe(viewLifecycleOwner, Observer { error ->
+                showToast(error)
+            })
+        }
+    }
+
+    private fun showToast(message: String){
+        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
     }
 
     override fun onDetach() {

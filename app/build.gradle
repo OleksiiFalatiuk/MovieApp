@@ -17,6 +17,8 @@ android {
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,6 +40,10 @@ android {
     }
     aaptOptions {
         cruncherEnabled = false
+    }
+
+    packagingOptions{
+        pickFirst 'androidsupportmultidexversion.txt'
     }
 }
 
@@ -80,5 +86,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.assertj:assertj-core:3.18.1'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 }

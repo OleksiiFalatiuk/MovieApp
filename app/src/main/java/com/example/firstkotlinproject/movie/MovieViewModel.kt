@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.model.Movie
-import com.example.firstkotlinproject.result.Result.Error
+import com.example.firstkotlinproject.result.Error
 import com.example.firstkotlinproject.result.Result
-import com.example.firstkotlinproject.result.Result.Success
+import com.example.firstkotlinproject.result.Success
 import kotlinx.coroutines.launch
 
 

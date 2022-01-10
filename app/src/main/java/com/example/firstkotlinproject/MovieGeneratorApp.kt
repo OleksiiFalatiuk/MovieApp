@@ -5,7 +5,7 @@ import com.example.firstkotlinproject.data.locale.room.AppDataBase
 import kotlinx.coroutines.InternalCoroutinesApi
 
 @InternalCoroutinesApi
-class SaveForDataBase: Application() {
+class MovieGeneratorApp: Application() {
     companion object{
         lateinit var appData: AppDataBase
     }

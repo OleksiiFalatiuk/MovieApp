@@ -3,12 +3,14 @@ package com.example.firstkotlinproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.firstkotlinproject.data.MovieRepository
-import com.example.firstkotlinproject.data.MovieRepositoryImpl
+import com.example.firstkotlinproject.data.locale.room.RoomData
 import com.example.firstkotlinproject.data.remote.retrofit.RetrofitDataSource
 import com.example.firstkotlinproject.movie.FragmentMovieList
 import com.example.firstkotlinproject.moviedetails.FragmentMovieDetails
 import com.example.firstkotlinproject.provider.MovieProvider
 import com.example.firstkotlinproject.provider.NetworkModule
+import com.example.firstkotlinproject.repository.MovieRepositoryImplNew
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
 
@@ -18,10 +20,15 @@ class MainActivity : AppCompatActivity(),
 
 
     private val networkModule = NetworkModule()
-    @ExperimentalSerializationApi
-    private val retrofitDataSource = RetrofitDataSource(networkModule.api)
-    @ExperimentalSerializationApi
-    private val movieRepository = MovieRepositoryImpl(retrofitDataSource)
+    private val remoteDataSource = RetrofitDataSource(networkModule.api)
+    @InternalCoroutinesApi
+    private val localeDataSource = RoomData(MovieGeneratorApp.appData)
+    @InternalCoroutinesApi
+    private val movieRepository = MovieRepositoryImplNew(localeDataSource,remoteDataSource)
+//    @ExperimentalSerializationApi
+//    private val retrofitDataSource = RetrofitDataSource(networkModule.api)
+//    @ExperimentalSerializationApi
+//    private val movieRepository = MovieRepositoryImpl(retrofitDataSource)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +73,7 @@ class MainActivity : AppCompatActivity(),
         supportFragmentManager.popBackStack()
     }
 
+    @InternalCoroutinesApi
     @ExperimentalSerializationApi
     override fun provideMovie(): MovieRepository = movieRepository
 
