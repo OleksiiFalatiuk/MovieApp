@@ -34,7 +34,7 @@ class MovieViewModel(private val movieRep: MovieRepository): ViewModel() {
 
     private fun stateResult(state: Result<List<Movie>>){
         when(state){
-            is Success -> _loadingMovieLiveData.value = state.data
+            is Success -> _loadingMovieLiveData.value = state.data!!
             is Error -> _errorMessageForMovieLiveData.value = state.message
         }
     }
