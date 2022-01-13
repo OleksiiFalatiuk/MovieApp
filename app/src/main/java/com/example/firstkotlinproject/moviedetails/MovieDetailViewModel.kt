@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firstkotlinproject.data.MovieRepository
-import com.example.firstkotlinproject.data.remote.RemoteDataSource
-import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
 import com.example.firstkotlinproject.result.Result
 import com.example.firstkotlinproject.result.Success

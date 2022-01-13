@@ -32,28 +32,21 @@ class MovieRepositoryImplNew(
     }
 
     override suspend fun loadMovie(movieId: Int): Result<MovieDetails> {
-         val movieDetailsDB = withContext(Dispatchers.IO){
-            localData.loadMovie(movieId)
-        }
-        return if (movieDetailsDB.isNotEmpty()){
-            localData.insertMovieDetails(movieDetailsDB)
-        }else{
-            remoteData.loadMovie(movieId)
+        return checkResultDetails {
+            withContext(Dispatchers.IO) {
+                remoteData.loadMovie(movieId)
+            }
         }
     }
 }
 
-//return checkResultDetails {
-//    withContext(Dispatchers.IO) {
-//        val movieDetailsDB = localData.loadMovie(movieId)
-//        (if (movieDetailsDB.isEmpty()) {
-//            val detailsFromNetwork = remoteData.loadMovie(movieId)
-//            localData.insertMovieDetails(listOf(detailsFromNetwork))
-//            detailsFromNetwork
-//        } else {
-//            movieDetailsDB
-//        })
-//    } as MovieDetails
-//}
 
 
+//val movieDetailsDB = localData.loadMovie(movieId)
+//(if (movieDetailsDB.isEmpty()) {
+//    val detailsFromNetwork = remoteData.loadMovie(movieId)
+//    localData.insertMovieDetails(listOf(detailsFromNetwork))
+//    detailsFromNetwork
+//} else {
+//    movieDetailsDB
+//})

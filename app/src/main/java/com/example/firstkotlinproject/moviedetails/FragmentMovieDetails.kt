@@ -72,11 +72,15 @@ class FragmentMovieDetails : Fragment() {
                 viewDetailModel.loadingMovieDetailLiveData.observe(viewLifecycleOwner, Observer { movie ->
                     if(movie != null){
                         bindUI(view,movie)
-                    }else{
-                       errorWasFound()
                     }
                 })
             }
+
+        scopeDetails.launch {
+            viewDetailModel.errorMessageForMovieDetailsLiveData.observe(viewLifecycleOwner, Observer {
+                errorWasFound()
+            })
+        }
     }
 
     private fun errorWasFound(){
