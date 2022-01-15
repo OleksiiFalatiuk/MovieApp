@@ -24,11 +24,7 @@ inline fun <L> checkResultDetails(block: () -> L): Result<L> {
     }finally {
         print("Check your network connection!")
     }
-//    return  try {
-//        Success(block)
-//    }finally {
-//        print("Check your network connection!")
-//    }
+
 }
 
 

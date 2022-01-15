@@ -40,8 +40,6 @@ class MovieRepositoryImplNew(
     }
 }
 
-
-
 //val movieDetailsDB = localData.loadMovie(movieId)
 //(if (movieDetailsDB.isEmpty()) {
 //    val detailsFromNetwork = remoteData.loadMovie(movieId)
@@ -50,3 +48,5 @@ class MovieRepositoryImplNew(
 //} else {
 //    movieDetailsDB
 //})
+
+
