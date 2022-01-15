@@ -11,9 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.example.firstkotlinproject.R
 
 import com.example.firstkotlinproject.provider.MovieProvider
+import com.example.firstkotlinproject.workmanager.WorkRequest
 import kotlinx.coroutines.*
 
 
@@ -23,6 +25,8 @@ class FragmentMovieList : Fragment() {
     private val viewModel: MovieViewModel by viewModels {
         MovieViewModelFactory((requireActivity() as MovieProvider).provideMovie())
     }
+
+    private val workRequest = WorkRequest()
 
     private var listener: MoviesListItemClickListener? = null
 
@@ -56,6 +60,8 @@ class FragmentMovieList : Fragment() {
 
             this.adapter = adapter
             loadDataToListAdapter(adapter)
+
+            WorkManager.getInstance(requireContext()).enqueue(workRequest.requestUpdater)
         }
     }
 
