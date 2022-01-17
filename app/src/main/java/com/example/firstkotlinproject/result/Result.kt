@@ -1,6 +1,5 @@
 package com.example.firstkotlinproject.result
 
-import com.example.firstkotlinproject.model.MovieDetails
 
 
 sealed class Result<out T>

@@ -17,14 +17,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.example.firstkotlinproject.R
 import com.example.firstkotlinproject.model.MovieDetails
 import com.example.firstkotlinproject.provider.MovieProvider
+import com.example.firstkotlinproject.workmanager.DetailsWorkRequest
+import com.example.firstkotlinproject.workmanager.MyWork
+import com.example.firstkotlinproject.workmanager.MyWorkDetails
 import kotlinx.coroutines.*
 
 
 class FragmentMovieDetails : Fragment() {
+
+    val detailsRequest = DetailsWorkRequest()
 
     private var listener: MovieDetailsBackClickListener? = null
     @DelicateCoroutinesApi
@@ -81,6 +87,8 @@ class FragmentMovieDetails : Fragment() {
                 errorWasFound()
             })
         }
+
+        WorkManager.getInstance(requireContext()).enqueue(detailsRequest.PeriodicWorkRequest(movieId))
     }
 
     private fun errorWasFound(){
