@@ -1,7 +1,9 @@
 package com.example.firstkotlinproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
 import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.data.locale.room.RoomData
 import com.example.firstkotlinproject.data.remote.retrofit.RetrofitDataSource
@@ -12,6 +14,7 @@ import com.example.firstkotlinproject.provider.NetworkModule
 import com.example.firstkotlinproject.repository.MovieRepositoryImplNew
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.descriptors.PrimitiveKind
 
 
 class MainActivity : AppCompatActivity(),
@@ -19,16 +22,19 @@ class MainActivity : AppCompatActivity(),
     FragmentMovieDetails.MovieDetailsBackClickListener,MovieProvider {
 
 
+    companion object {
+        private const val FRAGMENT_FILM = "film"
+    }
+
     private val networkModule = NetworkModule()
+    @ExperimentalSerializationApi
     private val remoteDataSource = RetrofitDataSource(networkModule.api)
     @InternalCoroutinesApi
     private val localeDataSource = RoomData(MovieGeneratorApp.appData)
+    @ExperimentalSerializationApi
     @InternalCoroutinesApi
     private val movieRepository = MovieRepositoryImplNew(localeDataSource,remoteDataSource)
-//    @ExperimentalSerializationApi
-//    private val retrofitDataSource = RetrofitDataSource(networkModule.api)
-//    @ExperimentalSerializationApi
-//    private val movieRepository = MovieRepositoryImpl(retrofitDataSource)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,25 @@ class MainActivity : AppCompatActivity(),
 
         if (savedInstanceState == null) {
             toMoviesList()
+            intent?.let(::handleIntent)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null){
+            handleIntent(intent)
+        }
+    }
+
+    private fun handleIntent(intent: Intent){
+        when(intent.action){
+            Intent.ACTION_VIEW -> {
+                val id = intent.data?.lastPathSegment?.toIntOrNull()
+                if (id != null) {
+                    toMovieDetails(id)
+                }
+            }
         }
     }
 
@@ -59,13 +84,14 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun toMovieDetails(movieId: Int) {
+        supportFragmentManager.popBackStack(FRAGMENT_FILM, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.flMain,
                 FragmentMovieDetails.create(movieId),
                 FragmentMovieDetails::class.java.simpleName
             )
-            .addToBackStack("trans:${FragmentMovieDetails::class.java.simpleName}")
+            .addToBackStack(FRAGMENT_FILM)
             .commit()
     }
 

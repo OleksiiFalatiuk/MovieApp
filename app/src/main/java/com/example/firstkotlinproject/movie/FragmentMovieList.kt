@@ -67,11 +67,12 @@ class FragmentMovieList : Fragment() {
 
     @DelicateCoroutinesApi
     private fun loadDataToListAdapter(adapter: MovieListAdapter){
-        scopeList.launch {
-            viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
-                adapter.submitList(movieList)
-            })
-        }
+            scopeList.launch {
+                viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
+                    adapter.submitList(movieList)
+                })
+            }
+
         scopeList.launch {
             viewModel.errorMessageForMovieLiveData.observe(viewLifecycleOwner, Observer { error ->
                 showToast(error)
