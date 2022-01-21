@@ -1,5 +1,6 @@
 package com.example.firstkotlinproject.result
 
+import com.example.firstkotlinproject.model.MovieDetails
 
 
 sealed class Result<out T>
@@ -17,13 +18,12 @@ inline fun <R> checkResult(block: () -> R): Result<R> {
     }
 }
 
-inline fun <L> checkResultDetails(block: () -> L): Result<L> {
+inline fun <R> checkResultDetails(block: () -> R): Result<R> {
     return try {
         Success(block())
     }finally {
         print("Check your network connection!")
     }
-
 }
 
 

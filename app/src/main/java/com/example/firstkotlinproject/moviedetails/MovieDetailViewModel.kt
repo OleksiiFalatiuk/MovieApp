@@ -22,7 +22,6 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository): ViewMo
 
     fun loadMovie(movieId: Int){
        viewModelScope.launch {
-//           _loadingMovieDetailLiveData.value = movieRepository.loadMovie(movieId)
            stateResultDetails(movieRepository.loadMovie(movieId))
        }
     }
