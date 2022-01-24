@@ -22,7 +22,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 },
                 time = info.movie.time,
                 review = info.movie.review,
-                isLiked = false,
+                isLiked = info.movie.isLiked,
                 rating = info.movie.rating,
                 avatar = info.movie.avatar
             )
@@ -37,7 +37,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 name = movie.name,
                 time = movie.time,
                 review = movie.review,
-                isLiked = false,
+                isLiked = movie.isLiked,
                 rating = movie.rating,
                 avatar = movie.avatar
             )
@@ -58,7 +58,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                     )
                 },
                 review = detail.movieDetails.review,
-                isLiked = false,
+                isLiked = detail.movieDetails.isLiked,
                 rating = detail.movieDetails.rating,
                 detailImageRes = detail.movieDetails.detailImageRes,
                 storyLine = detail.movieDetails.storyLine,
@@ -80,7 +80,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 years = details.years,
                 name = details.name,
                 review = details.review,
-                isLiked = false,
+                isLiked = details.isLiked,
                 rating = details.rating,
                 detailImageRes = details.detailImageRes,
                 storyLine = details.storyLine

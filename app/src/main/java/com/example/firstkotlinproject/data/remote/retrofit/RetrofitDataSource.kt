@@ -25,7 +25,7 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
         val genre = api.loadGenres().genres
         return api.getTopRated(page = 1).results.map {movie ->
             Movie(
-                id = movie.id,
+                id = movie.id.toInt(),
                 years = if (movie.adult) 16 else 13,
                 name = movie.title,
                 time = 120,
@@ -39,7 +39,7 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
                 }
                     .map { genre->
                         Genre(
-                          genre.idGenre,
+                          genre.idGenre.toInt(),
                           genre.nameGenre
                         )
                     }
@@ -51,7 +51,7 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
         sendConfiguration()
         val details = api.getDetails(movieId)
         return MovieDetails(
-            id = details.id,
+            id = details.id.toInt(),
             years = if (details.adult) 16 else 13,
             name = details.originalTitle,
             review = details.runtime.toInt(),
@@ -61,7 +61,7 @@ class RetrofitDataSource(private val api: MovieApiService): RemoteDataSource {
             detailImageRes = formingImage(baseUrl,backdropSize,details.backdropPath),
             genre = details.genres.map { genre ->
                 Genre(
-                    genre.idGenre,
+                    genre.idGenre.toInt(),
                     genre.nameGenre
                 )
             },

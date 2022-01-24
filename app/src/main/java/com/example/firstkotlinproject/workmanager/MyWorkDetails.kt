@@ -14,21 +14,6 @@ class MyWorkDetails(context: Context,
 ): CoroutineWorker(context, workerParams) {
 
 
-//    fun PeriodicWorkRequest(movieId: Int): PeriodicWorkRequest {
-//        val inputData = Data.Builder()
-//            .putInt("MOVIE_ID", movieId)
-//            .build()
-//        val constraint = Constraints.Builder()
-//            .setRequiredNetworkType(NetworkType.CONNECTED)
-//            .setRequiresCharging(true)
-//            .build()
-//        return PeriodicWorkRequest.Builder(MyWork::class.java,8, TimeUnit.HOURS)
-//            .setInputData(inputData)
-//            .setConstraints(constraint)
-//            .build()
-//    }
-
-
     override suspend fun doWork():Result {
         val movieForDetailsId = inputData.getInt("MOVIE_ID",1)
         return try {

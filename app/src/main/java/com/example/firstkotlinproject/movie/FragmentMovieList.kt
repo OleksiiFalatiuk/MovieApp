@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkManager
@@ -67,13 +68,13 @@ class FragmentMovieList : Fragment() {
 
     @DelicateCoroutinesApi
     private fun loadDataToListAdapter(adapter: MovieListAdapter){
-            scopeList.launch {
+            lifecycleScope.launchWhenResumed {
                 viewModel.loadingMovieLiveData.observe(viewLifecycleOwner, Observer { movieList ->
                     adapter.submitList(movieList)
                 })
             }
 
-        scopeList.launch {
+        lifecycleScope.launchWhenResumed {
             viewModel.errorMessageForMovieLiveData.observe(viewLifecycleOwner, Observer { error ->
                 showToast(error)
             })

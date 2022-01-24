@@ -35,7 +35,7 @@ class MovieRepositoryImplNew(
         return checkResultDetails {
             withContext(Dispatchers.IO) {
                 val movieDetailsDB = localData.loadMovie(movieId)
-                val filmDetails = movieDetailsDB.find { movieId.toLong() == it.id }
+                val filmDetails = movieDetailsDB.find { movieId == it.id }
                 (if (filmDetails == null) {
                     val detailsFromNetwork = remoteData.loadMovie(movieId)
                     localData.insertMovieDetails(listOf(detailsFromNetwork))

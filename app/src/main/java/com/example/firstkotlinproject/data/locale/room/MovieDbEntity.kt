@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class MovieDbEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Long,
+    val id: Int,
     val years: Int,
     val name: String,
     val time: Int,

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.example.firstkotlinproject.model.Actor
 
 
 @Entity(tableName = "MovieDetails",
@@ -17,7 +18,7 @@ import androidx.room.PrimaryKey
 data class MovieDetailsDbEntity(
     @PrimaryKey
     @ColumnInfo(name = "detailsId")
-    val detailsId: Long,
+    val detailsId: Int,
     val years: Int,
     val name: String,
     val review: Int,

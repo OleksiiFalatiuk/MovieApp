@@ -1,7 +1,7 @@
 package com.example.firstkotlinproject.model
 
 data class MovieDetails(
-    val id: Long,
+    val id: Int,
     val years: Int,
     val name: String,
     val genre: List<Genre>,

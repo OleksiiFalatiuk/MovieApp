@@ -10,7 +10,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
 
-@Database(entities = [MovieDbEntity::class, MovieDetailsDbEntity::class, GenreDbEntity::class, ActorDbEntity::class], version = 1)
+@Database(entities = [MovieDbEntity::class, MovieDetailsDbEntity::class, GenreDbEntity::class, ActorDbEntity::class], version = 2)
 abstract class AppDataBase: RoomDatabase() {
 
     abstract fun getMoviesDao(): MovieDao
@@ -21,13 +21,6 @@ abstract class AppDataBase: RoomDatabase() {
         private var instance: AppDataBase? = null
         private const val DATABASE_NAME = "Films.db"
 
-//        val instance: AppDataBase by lazy {
-//            Room.databaseBuilder(
-//                this,
-//                AppDataBase::class.java,
-//                DATABASE_NAME,
-//            ).build()
-//        }
 
         fun getInstance(context: Context): AppDataBase {
             if (instance == null){
@@ -37,7 +30,9 @@ abstract class AppDataBase: RoomDatabase() {
                             context.applicationContext,
                             AppDataBase::class.java,
                             DATABASE_NAME
-                        ).build()
+                        )
+                            .fallbackToDestructiveMigration()
+                            .build()
                     }
                 }
             }
