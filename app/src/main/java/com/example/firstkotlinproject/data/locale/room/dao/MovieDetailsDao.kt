@@ -3,6 +3,7 @@ package com.example.firstkotlinproject.data.locale.room.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.firstkotlinproject.data.locale.room.ActorDbEntity
 import com.example.firstkotlinproject.data.locale.room.MovieDetailsDbEntity
 import com.example.firstkotlinproject.data.locale.room.MovieDetailsWithGenresAndActors
 

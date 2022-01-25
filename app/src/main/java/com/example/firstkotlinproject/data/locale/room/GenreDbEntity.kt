@@ -1,9 +1,6 @@
 package com.example.firstkotlinproject.data.locale.room
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 
 @Entity(tableName = "Genre",
@@ -15,10 +12,11 @@ import androidx.room.PrimaryKey
     )]
 )
 data class GenreDbEntity(
-    @PrimaryKey
-    @ColumnInfo(name = "id", index = true)
-    val id: Int,
+//    @PrimaryKey
+//    @ColumnInfo(name = "id", index = true)
+//    val id: Int,
     val name: String,
+    @PrimaryKey
     @ColumnInfo(name = "detailsId", index = true)
     val detailsId: Int
 )

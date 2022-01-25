@@ -10,7 +10,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
 
-@Database(entities = [MovieDbEntity::class, MovieDetailsDbEntity::class, GenreDbEntity::class, ActorDbEntity::class], version = 2)
+@Database(entities = [MovieDbEntity::class, MovieDetailsDbEntity::class, GenreDbEntity::class, ActorDbEntity::class], version = 6)
 abstract class AppDataBase: RoomDatabase() {
 
     abstract fun getMoviesDao(): MovieDao

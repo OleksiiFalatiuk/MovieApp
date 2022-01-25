@@ -16,7 +16,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 name = info.movie.name,
                 genre = info.genres.map { genreInfo ->
                     Genre(
-                        id = genreInfo.id,
+                        id = genreInfo.detailsId,
                         name = genreInfo.name
                     )
                 },
@@ -39,11 +39,48 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 review = movie.review,
                 isLiked = movie.isLiked,
                 rating = movie.rating,
-                avatar = movie.avatar
+                avatar = movie.avatar,
+//                genre = movie.genre.map {
+//                    GenreDbEntity(
+//                        id = it.id,
+//                        name = it.name,
+//                        detailsId = it.id
+//                    )
+//                }
+            genres = movie.genre.map {
+                GenreDbEntity(
+                    detailsId = it.id,
+                    name = it.name
+                )
+            }
             )
         }
         appDb.getMoviesDao().insertMovies(db)
     }
+
+//    override fun insertMoviesWithGenres(movies: List<Movie>, genre: List<Genre>) {
+//        val dbMovie = movies.map { movie ->
+//            MovieDbEntity(
+//                id = movie.id,
+//                years = movie.years,
+//                name = movie.name,
+//                time = movie.time,
+//                review = movie.review,
+//                isLiked = movie.isLiked,
+//                rating = movie.rating,
+//                avatar = movie.avatar
+//            )
+//        }
+//        val dbGenre = genre.map { genre ->
+//            GenreDbEntity(
+//                detailsId = genre.id,
+//                name = genre.name
+//            )
+//        }
+//        appDb.getMoviesDao().insertMoviesWithGenres(dbMovie,dbGenre)
+//    }
+
+
 
     override suspend fun loadMovie(movieId: Int): List<MovieDetails> {
         return appDb.getMovieDetailsDao().getMovieDetails().map { detail ->
@@ -53,7 +90,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 name = detail.movieDetails.name,
                 genre = detail.genre.map { genre ->
                     Genre(
-                        id = genre.id,
+                        id = genre.detailsId,
                         name = genre.name
                     )
                 },
@@ -64,7 +101,7 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
                 storyLine = detail.movieDetails.storyLine,
                 actors = detail.actors.map { actor ->
                     Actor(
-                        id = actor.id,
+                        id = actor.detailsId,
                         name = actor.name,
                         imageRes = actor.imageRes
                     )
@@ -88,4 +125,15 @@ class RoomData(private val appDb: AppDataBase): LocaleDataSource {
         }
         appDb.getMovieDetailsDao().insertMovieDetails(dbDetails)
     }
+
+//    fun insertActorsDetails(actorDetail: List<Actor>) {
+//        val someActors = actorDetail.map { actor ->
+//            ActorDbEntity(
+//                detailsId = actor.id,
+//                name = actor.name,
+//                imageRes = actor.imageRes
+//            )
+//        }
+//        appDb.getMovieDetailsDao().insertActors(someActors)
+//    }
 }

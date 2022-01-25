@@ -1,8 +1,7 @@
 package com.example.firstkotlinproject.data.locale.room
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.firstkotlinproject.model.Genre
 
 
 @Entity(tableName = "Movie")
@@ -16,5 +15,7 @@ data class MovieDbEntity(
     val review: Long,
     val isLiked: Boolean,
     val rating: Int,
-    val avatar: String?
+    val avatar: String?,
+//    @Embedded
+//    val genre: List<GenreDbEntity>
 )
