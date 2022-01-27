@@ -15,7 +15,5 @@ data class MovieDbEntity(
     val review: Long,
     val isLiked: Boolean,
     val rating: Int,
-    val avatar: String?,
-//    @Embedded
-//    val genre: List<GenreDbEntity>
-)
+    val avatar: String?
+    )

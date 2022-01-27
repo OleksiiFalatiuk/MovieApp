@@ -3,6 +3,7 @@ package com.example.firstkotlinproject.repository
 import com.example.firstkotlinproject.data.MovieRepository
 import com.example.firstkotlinproject.data.locale.LocaleDataSource
 import com.example.firstkotlinproject.data.remote.RemoteDataSource
+import com.example.firstkotlinproject.model.Genre
 import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.model.MovieDetails
 import com.example.firstkotlinproject.result.Result
@@ -22,7 +23,9 @@ class MovieRepositoryImplNew(
                 val movieDB = localData.loadMovies()
                 (if (movieDB.isEmpty()) {
                     val movieFromNetwork = remoteData.loadMovies()
-                    localData.insertMovies(movieFromNetwork)
+//                    localData.insertMovies(movieFromNetwork)
+//                    localData.insertGenres(movieFromNetwork)
+                    localData.insertAll(movieFromNetwork)
                     movieFromNetwork
                 } else {
                     movieDB

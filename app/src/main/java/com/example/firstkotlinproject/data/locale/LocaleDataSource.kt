@@ -10,7 +10,8 @@ import com.example.firstkotlinproject.model.MovieDetails
 interface LocaleDataSource {
     suspend fun loadMovies(): List<Movie>
     fun insertMovies(movieFromApi: List<Movie>)
-//    fun insertMoviesWithGenres(movies: List<Movie>, genre: List<Genre>)
+    fun insertGenres(genreFromApi: List<Movie>)
+    fun insertAll(app: List<Movie>)
     suspend fun loadMovie(movieId: Int): List<MovieDetails>
     fun insertMovieDetails(detailsFromApi: List<MovieDetails>)
 }
