@@ -21,18 +21,21 @@ class MovieRepositoryImplNew(
         return checkResultDetails {
             withContext(Dispatchers.IO) {
                 val movieDB = localData.loadMovies()
-                (if (movieDB.isEmpty()) {
+                if (movieDB.isEmpty()) {
                     val movieFromNetwork = remoteData.loadMovies()
+                    localData.insertMovies(movieFromNetwork)
 //                    localData.insertMovies(movieFromNetwork)
 //                    localData.insertGenres(movieFromNetwork)
-                    localData.insertAll(movieFromNetwork)
+//                    localData.insertAll(movieFromNetwork)
                     movieFromNetwork
                 } else {
                     movieDB
-                })
+                }
             }
         }
     }
+
+
 
     override suspend fun loadMovie(movieId: Int): Result<MovieDetails> {
         return checkResultDetails {

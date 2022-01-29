@@ -13,13 +13,11 @@ interface MovieDao {
      fun getMovies(): List<MovieWithGenres>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertMovies(movies: List<MovieDbEntity>)
+     fun insertMovies(movies: MovieDbEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertGenres(genre: List<GenreDbEntity>?)
+     fun insertGenres(genre: List<GenreDbEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertAll(genre: List<MovieWithGenres>)
 
 
 

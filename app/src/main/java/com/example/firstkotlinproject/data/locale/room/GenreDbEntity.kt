@@ -12,8 +12,12 @@ import androidx.room.*
     )]
 )
 data class GenreDbEntity(
-    val name: String,
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "id",)
+//    val id: Int,
     @PrimaryKey
+    @ColumnInfo(name = "name")
+    val name: String,
     @ColumnInfo(name = "detailsId", index = true)
     val detailsId: Int
 )
