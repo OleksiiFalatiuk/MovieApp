@@ -7,19 +7,19 @@ import com.example.firstkotlinproject.data.locale.room.MovieWithGenres
 import com.example.firstkotlinproject.model.Movie
 
 @Dao
-abstract class MovieDao {
+interface MovieDao {
     @Transaction
     @Query("SELECT * FROM Movie")
-    abstract fun getMovies(): List<MovieWithGenres>
+     fun getMovies(): List<MovieWithGenres>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertMovies(movies: List<MovieDbEntity>)
+     fun insertMovies(movies: List<MovieDbEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertGenres(genre: List<GenreDbEntity>?)
+     fun insertGenres(genre: List<GenreDbEntity>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertAll(genre: List<MovieWithGenres>)
+     fun insertAll(genre: List<MovieWithGenres>)
 
 
 
