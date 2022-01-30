@@ -1,9 +1,13 @@
 package com.example.firstkotlinproject.data.locale.room
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "Genre",
+@Entity(
+    tableName = "Genre",
     foreignKeys = [ForeignKey(
         entity = MovieDbEntity::class,
         parentColumns = arrayOf("id"),
@@ -15,9 +19,11 @@ data class GenreDbEntity(
 //    @PrimaryKey(autoGenerate = true)
 //    @ColumnInfo(name = "id",)
 //    val id: Int,
-    @PrimaryKey
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "detailsId", index = true)
-    val detailsId: Int
+    val detailsId: Int,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(defaultValue = "0")
+    var primKey: Int = 0
 )

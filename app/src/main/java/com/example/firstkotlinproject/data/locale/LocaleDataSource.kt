@@ -11,9 +11,10 @@ interface LocaleDataSource {
 
     suspend fun loadMovies(): List<Movie>
 //    fun insertMovies(movieFromApi: List<Movie>)
-    fun insertGenres(genreFromApi: List<Genre>)
+
     fun insertMovies(list: List<Movie>)
     suspend fun loadMovie(movieId: Int): List<MovieDetails>
     fun insertMovieDetails(detailsFromApi: List<MovieDetails>)
 
+    fun insertGenres(genreFromApi: List<Genre>, movieId: Int)
 }

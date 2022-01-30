@@ -1,7 +1,6 @@
 package com.example.firstkotlinproject.data.locale.room
 
 import com.example.firstkotlinproject.data.locale.LocaleDataSource
-import com.example.firstkotlinproject.data.remote.RemoteDataSource
 import com.example.firstkotlinproject.model.Actor
 import com.example.firstkotlinproject.model.Genre
 import com.example.firstkotlinproject.model.Movie
@@ -32,7 +31,6 @@ class RoomData(private val appDb: AppDataBase) : LocaleDataSource {
     }
 
 
-
 // Важливий метод
 //    override fun insertMovies(movieFromApi: List<Movie>) {
 //        val db = movieFromApi.map { movie ->
@@ -51,7 +49,7 @@ class RoomData(private val appDb: AppDataBase) : LocaleDataSource {
 //        appDb.getMoviesDao().insertMovies(db)
 //    }
 
-    private fun insertOneMove(movie: Movie){
+    private fun insertOneMove(movie: Movie) {
         val movieBase = MovieDbEntity(
             id = movie.id,
             years = movie.years,
@@ -70,22 +68,26 @@ class RoomData(private val appDb: AppDataBase) : LocaleDataSource {
                 id = it.id
             )
         }
-        insertGenres(genreBase)
+        insertGenres(genreBase, movieBase.id)
 
     }
 
-    override fun insertGenres(genreFromApi: List<Genre>) {
+    override fun insertGenres(genreFromApi: List<Genre>, movieId: Int) {
         val genreBase = genreFromApi.map { genre ->
             GenreDbEntity(
                 name = genre.name,
-                detailsId = genre.id
+                detailsId = movieId
             )
         }
+
+        appDb.getMoviesDao().deleteOldGenreFromFilms(movieId)
         appDb.getMoviesDao().insertGenres(genreBase)
+
+
     }
 
-    override fun insertMovies(list: List<Movie>){
-        for (i in list){
+    override fun insertMovies(list: List<Movie>) {
+        for (i in list) {
             insertOneMove(i)
         }
     }
