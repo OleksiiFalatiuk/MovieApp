@@ -1,9 +1,6 @@
 package com.example.firstkotlinproject.data.locale.room.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.firstkotlinproject.data.locale.room.ActorDbEntity
 import com.example.firstkotlinproject.data.locale.room.MovieDetailsDbEntity
 import com.example.firstkotlinproject.data.locale.room.MovieDetailsWithGenresAndActors
@@ -14,6 +11,18 @@ interface MovieDetailsDao {
     @Query("SELECT * FROM MovieDetails")
     fun getMovieDetails(): List<MovieDetailsWithGenresAndActors>
 
-    @Insert()
+    @Insert
     fun insertMovieDetails(details: List<MovieDetailsDbEntity>)
+
+    @Insert
+    fun insertMovieDetailsSecondOne(details: MovieDetailsDbEntity)
+
+    @Insert
+    fun insertActorsEntity(actor: List<ActorDbEntity>)
+
+    @Update
+    fun updateActorsEntity(actor: List<ActorDbEntity>)
+
+    @Query("delete from Actor where detailsId like :id")
+    fun deleteOldActorsFromFilms(id: Int)
 }

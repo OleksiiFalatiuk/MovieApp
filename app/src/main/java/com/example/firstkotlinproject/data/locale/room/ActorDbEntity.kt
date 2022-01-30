@@ -14,12 +14,11 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )])
 data class ActorDbEntity(
-//    @PrimaryKey
-//    @ColumnInfo(name = "id", index = true)
-//    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(defaultValue = "0")
+    val primeActorKey: Int = 0,
     val name: String,
     val imageRes: String?,
-    @PrimaryKey
     @ColumnInfo(name = "detailsId", index = true)
     val detailsId: Int
 )

@@ -24,9 +24,6 @@ class MovieRepositoryImplNew(
                 if (movieDB.isEmpty()) {
                     val movieFromNetwork = remoteData.loadMovies()
                     localData.insertMovies(movieFromNetwork)
-//                    localData.insertMovies(movieFromNetwork)
-//                    localData.insertGenres(movieFromNetwork)
-//                    localData.insertAll(movieFromNetwork)
                     movieFromNetwork
                 } else {
                     movieDB
@@ -44,7 +41,7 @@ class MovieRepositoryImplNew(
                 val filmDetails = movieDetailsDB.find { movieId == it.id }
                 (if (filmDetails == null) {
                     val detailsFromNetwork = remoteData.loadMovie(movieId)
-                    localData.insertMovieDetails(listOf(detailsFromNetwork))
+                    localData.insertDetailsWithActorAndGenre(detailsFromNetwork)
                     detailsFromNetwork
                 } else {
                     filmDetails

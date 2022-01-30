@@ -16,7 +16,9 @@ import com.example.firstkotlinproject.model.Actor
     )]
 )
 data class MovieDetailsDbEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(defaultValue = "0")
+    val detailsPrime: Int = 0,
     @ColumnInfo(name = "detailsId")
     val detailsId: Int,
     val years: Int,

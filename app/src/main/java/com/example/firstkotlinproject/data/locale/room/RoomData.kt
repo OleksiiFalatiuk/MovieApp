@@ -31,24 +31,6 @@ class RoomData(private val appDb: AppDataBase) : LocaleDataSource {
     }
 
 
-// Важливий метод
-//    override fun insertMovies(movieFromApi: List<Movie>) {
-//        val db = movieFromApi.map { movie ->
-//            MovieDbEntity(
-//                id = movie.id,
-//                years = movie.years,
-//                name = movie.name,
-//                time = movie.time,
-//                review = movie.review,
-//                isLiked = movie.isLiked,
-//                rating = movie.rating,
-//                avatar = movie.avatar
-//            )
-//        }
-//
-//        appDb.getMoviesDao().insertMovies(db)
-//    }
-
     private fun insertOneMove(movie: Movie) {
         val movieBase = MovieDbEntity(
             id = movie.id,
@@ -121,30 +103,41 @@ class RoomData(private val appDb: AppDataBase) : LocaleDataSource {
         }
     }
 
-    override fun insertMovieDetails(detailsFromApi: List<MovieDetails>) {
-        val dbDetails = detailsFromApi.map { details ->
-            MovieDetailsDbEntity(
-                detailsId = details.id,
-                years = details.years,
-                name = details.name,
-                review = details.review,
-                isLiked = details.isLiked,
-                rating = details.rating,
-                detailImageRes = details.detailImageRes,
-                storyLine = details.storyLine
+
+    override fun insertDetailsWithActorAndGenre(detailsAPI: MovieDetails){
+        val detailsOfMMovie = MovieDetailsDbEntity(
+            detailsId = detailsAPI.id,
+            detailImageRes = detailsAPI.detailImageRes,
+            isLiked = detailsAPI.isLiked,
+            name = detailsAPI.name,
+            rating = detailsAPI.rating,
+            review = detailsAPI.review,
+            storyLine = detailsAPI.storyLine,
+            years = detailsAPI.years
+        )
+
+        appDb.getMovieDetailsDao().insertMovieDetailsSecondOne(detailsOfMMovie)
+
+        val actorsList = detailsAPI.actors.map {
+            Actor(
+                id = it.id,
+                imageRes = it.imageRes,
+                name = it.name
             )
         }
-        appDb.getMovieDetailsDao().insertMovieDetails(dbDetails)
+        insertActors(actorsList,detailsOfMMovie.detailsId)
     }
 
-//    fun insertActorsDetails(actorDetail: List<Actor>) {
-//        val someActors = actorDetail.map { actor ->
-//            ActorDbEntity(
-//                detailsId = actor.id,
-//                name = actor.name,
-//                imageRes = actor.imageRes
-//            )
-//        }
-//        appDb.getMovieDetailsDao().insertActors(someActors)
-//    }
+    private fun insertActors(actorFromApi: List<Actor>, detailId: Int){
+        val actorsInserted = actorFromApi.map {
+            ActorDbEntity(
+                detailsId = detailId,
+                imageRes = it.imageRes,
+                name = it.name
+            )
+        }
+        appDb.getMovieDetailsDao().deleteOldActorsFromFilms(detailId)
+        appDb.getMovieDetailsDao().insertActorsEntity(actorsInserted)
+    }
+
 }
