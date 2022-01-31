@@ -7,6 +7,7 @@ import com.example.firstkotlinproject.data.locale.room.MovieWithGenres
 
 @Dao
 interface MovieDao {
+
     @Transaction
     @Query("SELECT * FROM Movie")
     fun getMovies(): List<MovieWithGenres>

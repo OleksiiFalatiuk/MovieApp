@@ -20,7 +20,7 @@ class MyWorkDetails(context: Context,
             try {
                 Log.d("MyWorker", "Run work manager")
                 val movieFromApi = remoteData.loadMovie(movieForDetailsId)
-                localData.insertMovieDetails(listOf(movieFromApi))
+                localData.insertDetailsWithActorAndGenre(movieFromApi)
                 Result.success()
             }catch (e: Exception) {
                 Log.d("MyWorker", "exception in doWork ${e.message}")
