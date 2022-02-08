@@ -30,7 +30,7 @@ import kotlinx.coroutines.*
 
 class FragmentMovieDetails : Fragment() {
 
-    val detailsRequest = DetailsWorkRequest()
+    private val detailsRequest = DetailsWorkRequest()
 
     private var listener: MovieDetailsBackClickListener? = null
     @DelicateCoroutinesApi
@@ -75,7 +75,7 @@ class FragmentMovieDetails : Fragment() {
         viewDetailModel.loadMovie(movieId)
 
             scopeDetails.launch {
-                viewDetailModel.loadingMovieDetailLiveData.observe(viewLifecycleOwner, Observer { movie ->
+                viewDetailModel.loadingMovieDetailLiveData.observe(viewLifecycleOwner, { movie ->
                     if(movie != null){
                         bindUI(view,movie)
                     }
@@ -83,7 +83,7 @@ class FragmentMovieDetails : Fragment() {
             }
 
         scopeDetails.launch {
-            viewDetailModel.errorMessageForMovieDetailsLiveData.observe(viewLifecycleOwner, Observer {
+            viewDetailModel.errorMessageForMovieDetailsLiveData.observe(viewLifecycleOwner, {
                 errorWasFound()
             })
         }

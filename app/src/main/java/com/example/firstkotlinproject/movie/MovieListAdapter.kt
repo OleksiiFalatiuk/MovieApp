@@ -88,7 +88,7 @@ class MovieListAdapter(private val onClickCard: (movieId: Int) -> Unit) :
             }
 
             avatar?.setOnClickListener {
-                onClickCard(item.id.toInt())
+                onClickCard(item.id)
             }
         }
 
