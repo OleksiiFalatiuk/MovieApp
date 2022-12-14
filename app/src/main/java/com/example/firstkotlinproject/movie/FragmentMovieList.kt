@@ -17,15 +17,14 @@ import com.example.firstkotlinproject.R
 
 import com.example.firstkotlinproject.provider.MovieProvider
 import com.example.firstkotlinproject.workmanager.WorkRequest
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
-
+@AndroidEntryPoint
 class FragmentMovieList : Fragment() {
-    @DelicateCoroutinesApi
-    private val scopeList = CoroutineScope(Dispatchers.Main + SupervisorJob())
-    private val viewModel: MovieViewModel by viewModels {
-        MovieViewModelFactory((requireActivity() as MovieProvider).provideMovie())
-    }
+
+    private val viewModel: MovieViewModel by viewModels()
 
     private val workRequest = WorkRequest()
 

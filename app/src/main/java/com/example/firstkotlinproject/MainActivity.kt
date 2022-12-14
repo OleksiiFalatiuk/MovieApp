@@ -12,28 +12,30 @@ import com.example.firstkotlinproject.moviedetails.FragmentMovieDetails
 import com.example.firstkotlinproject.provider.MovieProvider
 import com.example.firstkotlinproject.provider.NetworkModule
 import com.example.firstkotlinproject.repository.MovieRepositoryImplNew
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.descriptors.PrimitiveKind
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     FragmentMovieList.MoviesListItemClickListener,
-    FragmentMovieDetails.MovieDetailsBackClickListener,MovieProvider {
+    FragmentMovieDetails.MovieDetailsBackClickListener {
 
 
     companion object {
         private const val FRAGMENT_FILM = "film"
     }
 
-    private val networkModule = NetworkModule()
-    @ExperimentalSerializationApi
-    private val remoteDataSource = RetrofitDataSource(networkModule.api)
-    @InternalCoroutinesApi
-    private val localeDataSource = RoomData(MovieGeneratorApp.appData)
-    @ExperimentalSerializationApi
-    @InternalCoroutinesApi
-    private val movieRepository = MovieRepositoryImplNew(localeDataSource,remoteDataSource)
+//    private val networkModule = NetworkModule()
+//    @ExperimentalSerializationApi
+//    private val remoteDataSource = RetrofitDataSource(networkModule.api)
+//    @InternalCoroutinesApi
+//    private val localeDataSource = RoomData(MovieGeneratorApp.appData)
+//    @ExperimentalSerializationApi
+//    @InternalCoroutinesApi
+//    private val movieRepository = MovieRepositoryImplNew(localeDataSource,remoteDataSource)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,8 +101,8 @@ class MainActivity : AppCompatActivity(),
         supportFragmentManager.popBackStack()
     }
 
-    @InternalCoroutinesApi
-    @ExperimentalSerializationApi
-    override fun provideMovie(): MovieRepository = movieRepository
+//    @InternalCoroutinesApi
+//    @ExperimentalSerializationApi
+//    override fun provideMovie(): MovieRepository = movieRepository
 
 }

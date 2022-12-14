@@ -9,10 +9,15 @@ import com.example.firstkotlinproject.model.Movie
 import com.example.firstkotlinproject.result.Error
 import com.example.firstkotlinproject.result.Result
 import com.example.firstkotlinproject.result.Success
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class MovieViewModel(private val movieRep: MovieRepository): ViewModel() {
+@HiltViewModel
+class MovieViewModel @Inject constructor(
+    private val movieRep: MovieRepository
+    ): ViewModel() {
 
     private val _loadingMovieLiveData = MutableLiveData<List<Movie>>(emptyList())
     private val _errorMessageForMovieLiveData = MutableLiveData<String>()

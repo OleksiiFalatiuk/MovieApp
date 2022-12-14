@@ -11,8 +11,9 @@ import com.example.firstkotlinproject.result.Success
 import com.example.firstkotlinproject.result.Error
 
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieDetailViewModel(private val movieRepository: MovieRepository): ViewModel() {
+class MovieDetailViewModel @Inject constructor(private val movieRepository: MovieRepository): ViewModel() {
 
     private val _loadingMovieDetailLiveData = MutableLiveData<MovieDetails?>(null)
     private val _errorMessageForMovieDetailsLiveData = MutableLiveData<String>()

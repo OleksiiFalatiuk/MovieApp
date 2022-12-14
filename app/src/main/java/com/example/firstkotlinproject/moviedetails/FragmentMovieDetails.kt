@@ -25,9 +25,11 @@ import com.example.firstkotlinproject.provider.MovieProvider
 import com.example.firstkotlinproject.workmanager.DetailsWorkRequest
 import com.example.firstkotlinproject.workmanager.MyWork
 import com.example.firstkotlinproject.workmanager.MyWorkDetails
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
-
+@AndroidEntryPoint
 class FragmentMovieDetails : Fragment() {
 
     private val detailsRequest = DetailsWorkRequest()
@@ -36,9 +38,7 @@ class FragmentMovieDetails : Fragment() {
     @DelicateCoroutinesApi
     private val scopeDetails = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
-    private val viewDetailModel: MovieDetailViewModel by viewModels{
-        MovieDetailViewModelFactory((requireActivity() as MovieProvider).provideMovie())
-    }
+    private val viewDetailModel: MovieDetailViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
